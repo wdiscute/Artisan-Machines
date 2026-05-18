@@ -1,0 +1,18 @@
+{
+  "type": "artisan_machines:aging_cask",
+  "ingredients": [
+    {
+      "item": "minecraft:glow_berries"
+    }
+  ],
+  "processing_hours": 48,
+  "result": {
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "minecraft:water"
+      }
+    },
+    "count": 1,
+    "id": "minecraft:potion"
+  }
+}

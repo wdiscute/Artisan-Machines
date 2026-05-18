@@ -60,7 +60,16 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_grapes", has(Items.SWEET_BERRIES))
                 .save(output);
 
-
+        //aging cask
+        new ArtisanRecipeBuilder(
+                Items.POTION.getDefaultInstance(),
+                AgingCaskRecipe::new,
+                48,
+                Ingredient.of(Items.GLOW_BERRIES)
+        )
+                .group("aging_cask")
+                .unlockedBy("has_glow_berries", has(Items.GLOW_BERRIES))
+                .save(output);
 
 
     }

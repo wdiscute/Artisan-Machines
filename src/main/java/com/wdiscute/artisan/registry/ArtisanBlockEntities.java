@@ -1,6 +1,7 @@
 package com.wdiscute.artisan.registry;
 
 import com.wdiscute.artisan.Artisan;
+import com.wdiscute.artisan.machines.AgingCaskBlockEntity;
 import com.wdiscute.artisan.machines.CheesePressBlockEntity;
 import com.wdiscute.artisan.machines.LoomBlockEntity;
 import com.wdiscute.artisan.machines.WineKegBlockEntity;
@@ -22,6 +23,7 @@ public class ArtisanBlockEntities
     public static final Supplier<BlockEntityType<?>> LOOM = register("loom", ArtisanBlocks.LOOM, LoomBlockEntity::new);
     public static final Supplier<BlockEntityType<?>> CHEESE_PRESS = register("cheese_press", ArtisanBlocks.CHEESE_PRESS, CheesePressBlockEntity::new);
     public static final Supplier<BlockEntityType<?>> WINE_KEG = register("wine_keg", ArtisanBlocks.WINE_KEG, WineKegBlockEntity::new);
+    public static final Supplier<BlockEntityType<?>> AGING_CASK = register("aging_cask", ArtisanBlocks.AGING_CASK, AgingCaskBlockEntity::new);
 
 
     static <T extends BlockEntity> Supplier<BlockEntityType<?>> register(String name, DeferredBlock<Block> block, BlockEntityType.BlockEntitySupplier<? extends T> factory)

@@ -17,6 +17,7 @@ public interface ArtisanRecipeTypes
     Supplier<RecipeType<AbstractArtisanRecipe>> LOOM = register("loom");
     Supplier<RecipeType<AbstractArtisanRecipe>> CHEESE_PRESS = register("cheese_press");
     Supplier<RecipeType<AbstractArtisanRecipe>> WINE_KEG = register("wine_keg");
+    Supplier<RecipeType<AbstractArtisanRecipe>> AGING_CASK = register("aging_cask");
 
 
 

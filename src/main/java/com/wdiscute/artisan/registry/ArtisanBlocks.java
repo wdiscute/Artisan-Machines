@@ -1,6 +1,7 @@
 package com.wdiscute.artisan.registry;
 
 import com.wdiscute.artisan.Artisan;
+import com.wdiscute.artisan.machines.AgingCaskBlock;
 import com.wdiscute.artisan.machines.CheesePressBlock;
 import com.wdiscute.artisan.machines.LoomBlock;
 import com.wdiscute.artisan.machines.WineKegBlock;
@@ -20,6 +21,7 @@ public interface ArtisanBlocks
     DeferredBlock<Block> LOOM = register("loom", LoomBlock::new);
     DeferredBlock<Block> CHEESE_PRESS = register("cheese_press", CheesePressBlock::new);
     DeferredBlock<Block> WINE_KEG = register("wine_keg", WineKegBlock::new);
+    DeferredBlock<Block> AGING_CASK = register("aging_cask", AgingCaskBlock::new);
 
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> block)
