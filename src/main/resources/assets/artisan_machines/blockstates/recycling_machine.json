@@ -1,0 +1,53 @@
+{
+  "variants": {
+    "facing=north,state=idle": {
+      "model": "artisan_machines:block/recycling_machine_idle"
+    },
+    "facing=east,state=idle": {
+      "model": "artisan_machines:block/recycling_machine_idle",
+      "y": 90
+    },
+    "facing=south,state=idle": {
+      "model": "artisan_machines:block/recycling_machine_idle",
+      "y": 180
+    },
+    "facing=west,state=idle": {
+      "model": "artisan_machines:block/recycling_machine_idle",
+      "y": 270
+    },
+
+
+    "facing=north,state=working": {
+      "model": "artisan_machines:block/recycling_machine_working"
+    },
+    "facing=east,state=working": {
+      "model": "artisan_machines:block/recycling_machine_working",
+      "y": 90
+    },
+    "facing=south,state=working": {
+      "model": "artisan_machines:block/recycling_machine_working",
+      "y": 180
+    },
+    "facing=west,state=working": {
+      "model": "artisan_machines:block/recycling_machine_working",
+      "y": 270
+    },
+
+
+    "facing=north,state=harvestable": {
+      "model": "artisan_machines:block/recycling_machine_harvestable"
+    },
+    "facing=east,state=harvestable": {
+      "model": "artisan_machines:block/recycling_machine_harvestable",
+      "y": 90
+    },
+    "facing=south,state=harvestable": {
+      "model": "artisan_machines:block/recycling_machine_harvestable",
+      "y": 180
+    },
+    "facing=west,state=harvestable": {
+      "model": "artisan_machines:block/recycling_machine_harvestable",
+      "y": 270
+    }
+  }
+}

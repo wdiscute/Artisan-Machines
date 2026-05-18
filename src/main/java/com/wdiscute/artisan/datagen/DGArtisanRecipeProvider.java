@@ -162,7 +162,16 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_grass", has(Items.SHORT_GRASS))
                 .save(output);
 
-
+        //recycling machine
+        new ArtisanRecipeBuilder(
+                Items.DIAMOND.getDefaultInstance(),
+                RecyclingMachineRecipe::new,
+                2,
+                Ingredient.of(Items.STONE)
+        )
+                .group("recycling_machine")
+                .unlockedBy("has_stone", has(Items.STONE))
+                .save(output);
 
 
     }
