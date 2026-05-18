@@ -7,16 +7,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CheesePressBlockEntity extends AbstractDailyBlockEntity
+public class AncientCaskBlockEntity extends AbstractDailyBlockEntity
 {
-    public CheesePressBlockEntity(BlockPos blockPos, BlockState blockState)
+    public AncientCaskBlockEntity(BlockPos blockPos, BlockState blockState)
     {
-        super(ArtisanBlockEntities.CHEESE_PRESS.get(), blockPos, blockState);
+        super(ArtisanBlockEntities.ANCIENT_CASK.get(), blockPos, blockState);
     }
 
     @Override
     public RecipeType<? extends AbstractArtisanRecipe> getRecipeType()
     {
-        return ArtisanRecipeTypes.CHEESE_PRESS.get();
+        return ArtisanRecipeTypes.ANCIENT_CASK.get();
     }
 }

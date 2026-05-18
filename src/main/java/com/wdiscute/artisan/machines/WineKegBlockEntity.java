@@ -15,12 +15,6 @@ public class WineKegBlockEntity extends AbstractDailyBlockEntity
     }
 
     @Override
-    public void tick()
-    {
-        super.tick();
-    }
-
-    @Override
     public RecipeType<? extends AbstractArtisanRecipe> getRecipeType()
     {
         return ArtisanRecipeTypes.WINE_KEG.get();

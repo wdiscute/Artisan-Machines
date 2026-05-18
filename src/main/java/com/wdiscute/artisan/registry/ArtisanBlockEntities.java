@@ -1,10 +1,7 @@
 package com.wdiscute.artisan.registry;
 
 import com.wdiscute.artisan.Artisan;
-import com.wdiscute.artisan.machines.AgingCaskBlockEntity;
-import com.wdiscute.artisan.machines.CheesePressBlockEntity;
-import com.wdiscute.artisan.machines.LoomBlockEntity;
-import com.wdiscute.artisan.machines.WineKegBlockEntity;
+import com.wdiscute.artisan.machines.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,15 +12,16 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class ArtisanBlockEntities
+public interface ArtisanBlockEntities
 {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
+    DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Artisan.MOD_ID);
 
-    public static final Supplier<BlockEntityType<?>> LOOM = register("loom", ArtisanBlocks.LOOM, LoomBlockEntity::new);
-    public static final Supplier<BlockEntityType<?>> CHEESE_PRESS = register("cheese_press", ArtisanBlocks.CHEESE_PRESS, CheesePressBlockEntity::new);
-    public static final Supplier<BlockEntityType<?>> WINE_KEG = register("wine_keg", ArtisanBlocks.WINE_KEG, WineKegBlockEntity::new);
-    public static final Supplier<BlockEntityType<?>> AGING_CASK = register("aging_cask", ArtisanBlocks.AGING_CASK, AgingCaskBlockEntity::new);
+    Supplier<BlockEntityType<?>> LOOM = register("loom", ArtisanBlocks.LOOM, LoomBlockEntity::new);
+    Supplier<BlockEntityType<?>> CHEESE_PRESS = register("cheese_press", ArtisanBlocks.CHEESE_PRESS, CheesePressBlockEntity::new);
+    Supplier<BlockEntityType<?>> WINE_KEG = register("wine_keg", ArtisanBlocks.WINE_KEG, WineKegBlockEntity::new);
+    Supplier<BlockEntityType<?>> AGING_CASK = register("aging_cask", ArtisanBlocks.AGING_CASK, AgingCaskBlockEntity::new);
+    Supplier<BlockEntityType<?>> ANCIENT_CASK = register("ancient_cask", ArtisanBlocks.ANCIENT_CASK, AncientCaskBlockEntity::new);
 
 
     static <T extends BlockEntity> Supplier<BlockEntityType<?>> register(String name, DeferredBlock<Block> block, BlockEntityType.BlockEntitySupplier<? extends T> factory)
@@ -32,7 +30,7 @@ public class ArtisanBlockEntities
                 () -> BlockEntityType.Builder.of(factory, block.get()).build(null));
     }
 
-    public static void register(IEventBus eventBus) {
+    static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }
 }

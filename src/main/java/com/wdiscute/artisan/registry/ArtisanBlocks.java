@@ -1,10 +1,7 @@
 package com.wdiscute.artisan.registry;
 
 import com.wdiscute.artisan.Artisan;
-import com.wdiscute.artisan.machines.AgingCaskBlock;
-import com.wdiscute.artisan.machines.CheesePressBlock;
-import com.wdiscute.artisan.machines.LoomBlock;
-import com.wdiscute.artisan.machines.WineKegBlock;
+import com.wdiscute.artisan.machines.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -22,6 +19,7 @@ public interface ArtisanBlocks
     DeferredBlock<Block> CHEESE_PRESS = register("cheese_press", CheesePressBlock::new);
     DeferredBlock<Block> WINE_KEG = register("wine_keg", WineKegBlock::new);
     DeferredBlock<Block> AGING_CASK = register("aging_cask", AgingCaskBlock::new);
+    DeferredBlock<Block> ANCIENT_CASK = register("ancient_cask", AncientCaskBlock::new);
 
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> block)

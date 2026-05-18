@@ -15,12 +15,6 @@ public class LoomBlockEntity extends AbstractDailyBlockEntity
     }
 
     @Override
-    public void tick()
-    {
-        super.tick();
-    }
-
-    @Override
     public RecipeType<? extends AbstractArtisanRecipe> getRecipeType()
     {
         return ArtisanRecipeTypes.LOOM.get();

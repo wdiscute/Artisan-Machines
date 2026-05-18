@@ -71,6 +71,16 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_glow_berries", has(Items.GLOW_BERRIES))
                 .save(output);
 
+        //ancient cask
+        new ArtisanRecipeBuilder(
+                Items.POTION.getDefaultInstance(),
+                AncientCaskRecipe::new,
+                8,
+                Ingredient.of(Items.BIG_DRIPLEAF)
+        )
+                .group("ancient_cask")
+                .unlockedBy("has_big_dripleaf", has(Items.BIG_DRIPLEAF))
+                .save(output);
 
     }
 }

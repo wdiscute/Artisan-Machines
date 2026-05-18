@@ -18,6 +18,7 @@ public interface ArtisanRecipeSerializers
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> CHEESE_PRESS = register("cheese_press", CheesePressRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> WINE_KEG = register("wine_keg", WineKegRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> AGING_CASK = register("aging_cask", AgingCaskRecipe::new);
+    Supplier<RecipeSerializer<AbstractArtisanRecipe>> ANCIENT_CASK = register("ancient_cask", AncientCaskRecipe::new);
 
 
     static Supplier<RecipeSerializer<AbstractArtisanRecipe>> register(

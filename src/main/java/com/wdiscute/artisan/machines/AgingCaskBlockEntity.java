@@ -15,12 +15,6 @@ public class AgingCaskBlockEntity extends AbstractDailyBlockEntity
     }
 
     @Override
-    public void tick()
-    {
-        super.tick();
-    }
-
-    @Override
     public RecipeType<? extends AbstractArtisanRecipe> getRecipeType()
     {
         return ArtisanRecipeTypes.AGING_CASK.get();
