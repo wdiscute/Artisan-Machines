@@ -120,8 +120,8 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
             if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractDailyBlockEntity adbe)
             {
                 adbe.harvest();
-                return ItemInteractionResult.SUCCESS;
             }
+            return ItemInteractionResult.SUCCESS;
         }
 
 
