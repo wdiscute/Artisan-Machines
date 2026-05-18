@@ -103,7 +103,13 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
         if (blockState.getValue(STATE).equals(State.WORKING))
         {
             if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractDailyBlockEntity adbe)
-                displayTimeRemainingClientMessage(player, adbe);
+            {
+                //dirty check to prevent crashes/not saving the world to lock that block into negative hours remaining
+                if (adbe.getHoursRemaining() < 0)
+                    level.setBlockAndUpdate(pos, state.setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.IDLE));
+                else
+                    displayTimeRemainingClientMessage(player, adbe);
+            }
 
             return ItemInteractionResult.SUCCESS;
         }
