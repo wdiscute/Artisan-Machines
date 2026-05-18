@@ -1,0 +1,13 @@
+{
+  "type": "artisan_machines:cheese_press",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "processing_days": 1,
+  "result": {
+    "count": 1,
+    "id": "minecraft:yellow_wool"
+  }
+}

@@ -28,10 +28,10 @@ public class Artisan
 
     public Artisan(IEventBus modEventBus, ModContainer modContainer)
     {
-        ArtisanCreativeModeTabs.register(modEventBus);
         ArtisanItems.register(modEventBus);
         ArtisanBlocks.register(modEventBus);
         ArtisanBlockEntities.register(modEventBus);
+        ArtisanCreativeModeTabs.register(modEventBus);
         ArtisanRecipeTypes.register(modEventBus);
         ArtisanRecipeSerializers.register(modEventBus);
 

@@ -1,8 +1,6 @@
 package com.wdiscute.artisan.datagen;
 
-import com.wdiscute.artisan.recipe.ArtisanRecipeBuilder;
-import com.wdiscute.artisan.recipe.ArtisanRecipeInput;
-import com.wdiscute.artisan.recipe.LoomRecipe;
+import com.wdiscute.artisan.recipe.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -31,14 +29,36 @@ public class DGArtisanRecipeProvider extends RecipeProvider
         new ArtisanRecipeBuilder(
                 Items.DIAMOND.getDefaultInstance(),
                 LoomRecipe::new,
-                1,
+                24,
                 Ingredient.of(ItemTags.WOOL),
                 Ingredient.of(ItemTags.WOOL),
                 Ingredient.of(ItemTags.WOOL)
         )
+                .group("loom")
                 .unlockedBy("has_wool", has(ItemTags.WOOL))
                 .save(output);
 
+        //cheese press
+        new ArtisanRecipeBuilder(
+                Items.YELLOW_WOOL.getDefaultInstance(),
+                CheesePressRecipe::new,
+                8,
+                Ingredient.of(Items.MILK_BUCKET)
+        )
+                .group("cheese_press")
+                .unlockedBy("has_milk", has(Items.MILK_BUCKET))
+                .save(output);
+
+        //wine keg
+        new ArtisanRecipeBuilder(
+                Items.POTION.getDefaultInstance(),
+                WineKegRecipe::new,
+                8,
+                Ingredient.of(Items.SWEET_BERRIES)
+        )
+                .group("wine_keg")
+                .unlockedBy("has_grapes", has(Items.SWEET_BERRIES))
+                .save(output);
 
 
 

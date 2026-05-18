@@ -1,6 +1,5 @@
 package com.wdiscute.artisan.recipe;
 
-import com.wdiscute.artisan.Artisan;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -56,7 +55,8 @@ public class ArtisanRecipeBuilder implements RecipeBuilder
     public void save(RecipeOutput recipeOutput)
     {
         save(recipeOutput, ResourceLocation.withDefaultNamespace(
-                BuiltInRegistries.ITEM.getKey(stackResult.getItem()).getPath() + "_from_artisan"));
+                BuiltInRegistries.ITEM.getKey(stackResult.getItem()).getPath()
+                        + "_from_" + group));
     }
 
     @Override
