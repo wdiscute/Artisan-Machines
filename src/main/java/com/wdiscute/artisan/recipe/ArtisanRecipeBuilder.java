@@ -18,7 +18,7 @@ import java.util.*;
 
 public class ArtisanRecipeBuilder implements RecipeBuilder
 {
-    private final ItemStack stackResult; // Neo: add stack result support
+    private final ItemStack stackResult;
     private final List<Ingredient> ingredients;
     private final int processing_time;
     private String group;
@@ -78,8 +78,10 @@ public class ArtisanRecipeBuilder implements RecipeBuilder
                 .build(id.withPrefix("recipes/")));
     }
 
-    private void ensureValid(ResourceLocation id) {
-        if (this.criteria.isEmpty()) {
+    private void ensureValid(ResourceLocation id)
+    {
+        if (this.criteria.isEmpty())
+        {
             throw new IllegalStateException("No way of obtaining recipe " + id);
         }
     }

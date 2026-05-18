@@ -20,7 +20,7 @@ public class ArtisanSerializer<T extends AbstractArtisanRecipe> implements Recip
                 instance -> instance.group(
                                 Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.ingredients),
                                 ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
-                                Codec.INT.fieldOf("processing_days").forGetter(recipe -> recipe.processing_hours)
+                                Codec.INT.fieldOf("processing_hours").forGetter(recipe -> recipe.processing_hours)
                         )
                         .apply(instance, factory::create)
         );

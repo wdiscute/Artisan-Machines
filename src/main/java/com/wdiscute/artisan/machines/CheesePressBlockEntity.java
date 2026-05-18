@@ -25,10 +25,4 @@ public class CheesePressBlockEntity extends AbstractDailyBlockEntity
     {
         return ArtisanRecipeTypes.CHEESE_PRESS.get();
     }
-
-    @Override
-    public void hourlyTick(long hour)
-    {
-        super.hourlyTick(hour);
-    }
 }

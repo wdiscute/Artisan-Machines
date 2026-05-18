@@ -105,7 +105,8 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
         {
             if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractDailyBlockEntity adbe)
                 player.displayClientMessage(Component.translatable("block.artisan_machines.machine.currently_making")
-                        .append(Component.translatable(adbe.getResultItem().getItem().getDescriptionId())), true);
+                        .append(Component.translatable(adbe.getResultItem().getItem().getDescriptionId()))
+                        .append(Component.translatable("block.artisan_machines.machine.hours", adbe.getHoursRemaining())), true);
 
             return ItemInteractionResult.SUCCESS;
         }

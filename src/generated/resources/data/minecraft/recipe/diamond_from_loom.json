@@ -11,7 +11,7 @@
       "tag": "minecraft:wool"
     }
   ],
-  "processing_days": 1,
+  "processing_hours": 24,
   "result": {
     "count": 1,
     "id": "minecraft:diamond"

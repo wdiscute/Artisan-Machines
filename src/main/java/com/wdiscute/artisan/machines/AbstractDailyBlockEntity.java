@@ -38,6 +38,11 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
         super(type, pos, blockState);
     }
 
+    public int getHoursRemaining()
+    {
+        return hoursRemaining;
+    }
+
     public void putItem(ItemStack itemStack)
     {
         items.add(itemStack.copyWithCount(1));
@@ -76,6 +81,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
             level.setBlockAndUpdate(worldPosition, getBlockState().setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.WORKING));
             //+1 as a recipe put 1 second before daily reset shouldn't be finished
             hoursRemaining = recipe.getHours() + 1;
+            lastTickHour = -1;
         }
         setChanged();
     }
@@ -103,21 +109,25 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     /**
      * ticks daily, adds one to last tick hour so if the machine was unloaded all days are ticked
      */
-    public void hourlyTick(long hour)
+    public void hourlyTick(long hour, BlockState state)
     {
-        System.out.println("Hourly tick on hour " + lastTickHour + " for machine " + this);
         if (lastTickHour == -1)
             lastTickHour = hour;
         else
             lastTickHour++;
 
+        System.out.println("Hourly tick on hour " + lastTickHour + " for machine " + this);
+
         //if working
-        if (level.getBlockState(worldPosition).getValue(AbstractDailyBlock.STATE).equals(AbstractDailyBlock.State.WORKING))
+        if (state.getValue(AbstractDailyBlock.STATE).equals(AbstractDailyBlock.State.WORKING))
             hoursRemaining--;
 
         //if recipe finished
         if (hoursRemaining == 0)
-            level.setBlockAndUpdate(worldPosition, getBlockState().setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.HARVESTABLE));
+        {
+            System.out.println("Completed Recipe in " + this.getBlockPos() + " for an output of " + recipeResult);
+            level.setBlockAndUpdate(worldPosition, state.setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.HARVESTABLE));
+        }
 
         setChanged();
     }
@@ -194,6 +204,14 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
         loadAllItems(pkt.getTag(), lookupProvider);
     }
 
+    private int getTickOffset(Level level)
+    {
+        if (tickOffset != -1) return tickOffset;
+        tickOffset = level.getRandom().nextInt(ArtisanConfig.TICK_DELAY.get());
+        setChanged();
+        return tickOffset;
+    }
+
     public static <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state)
     {
         //don't tick on click
@@ -211,15 +229,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
 
             //daily tick
             long hour = (level.getGameTime() + dbe.getTickOffset(level)) / 1000;
-            if (dbe.lastTickHour < hour) dbe.hourlyTick(hour);
+            if (dbe.lastTickHour < hour) dbe.hourlyTick(hour, state);
         };
-    }
-
-    private int getTickOffset(Level level)
-    {
-        if (tickOffset != -1) return tickOffset;
-        tickOffset = level.getRandom().nextInt(ArtisanConfig.TICK_DELAY.get());
-        setChanged();
-        return tickOffset;
     }
 }

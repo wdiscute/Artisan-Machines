@@ -25,10 +25,4 @@ public class WineKegBlockEntity extends AbstractDailyBlockEntity
     {
         return ArtisanRecipeTypes.WINE_KEG.get();
     }
-
-    @Override
-    public void hourlyTick(long hour)
-    {
-        super.hourlyTick(hour);
-    }
 }

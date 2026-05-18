@@ -25,10 +25,4 @@ public class LoomBlockEntity extends AbstractDailyBlockEntity
     {
         return ArtisanRecipeTypes.LOOM.get();
     }
-
-    @Override
-    public void hourlyTick(long hour)
-    {
-        super.hourlyTick(hour);
-    }
 }
