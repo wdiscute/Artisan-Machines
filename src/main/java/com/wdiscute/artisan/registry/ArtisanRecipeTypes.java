@@ -24,6 +24,7 @@ public interface ArtisanRecipeTypes
     Supplier<RecipeType<AbstractArtisanRecipe>> FISH_SMOKER = register("fish_smoker");
     Supplier<RecipeType<AbstractArtisanRecipe>> DEHYDRATOR = register("dehydrator");
     Supplier<RecipeType<AbstractArtisanRecipe>> MAYONNAISE_MACHINE = register("mayonnaise_machine");
+    Supplier<RecipeType<AbstractArtisanRecipe>> PRESERVES_JAR = register("preserves_jar");
 
 
 

@@ -27,6 +27,7 @@ public interface ArtisanBlockEntities
     Supplier<BlockEntityType<?>> FISH_SMOKER = register("fish_smoker", ArtisanBlocks.FISH_SMOKER, FishSmokerBlockEntity::new);
     Supplier<BlockEntityType<?>> DEHYDRATOR = register("dehydrator", ArtisanBlocks.DEHYDRATOR, DehydratorBlockEntity::new);
     Supplier<BlockEntityType<?>> MAYONNAISE_MACHINE = register("mayonnaise_machine", ArtisanBlocks.MAYONNAISE_MACHINE, MayonnaiseMachineBlockEntity::new);
+    Supplier<BlockEntityType<?>> PRESERVES_JAR = register("preserves_jar", ArtisanBlocks.PRESERVES_JAR, PreservesJarBlockEntity::new);
 
 
     static <T extends BlockEntity> Supplier<BlockEntityType<?>> register(String name, DeferredBlock<Block> block, BlockEntityType.BlockEntitySupplier<? extends T> factory)

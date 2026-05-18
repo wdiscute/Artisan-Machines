@@ -138,7 +138,16 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_egg", has(Items.EGG))
                 .save(output);
 
-
+        //preserves jar
+        new ArtisanRecipeBuilder(
+                Items.SEA_PICKLE.getDefaultInstance(),
+                PreservesJarRecipe::new,
+                2,
+                Ingredient.of(Items.CACTUS)
+        )
+                .group("preserves_jar")
+                .unlockedBy("has_cactus", has(Items.CACTUS))
+                .save(output);
 
     }
 }

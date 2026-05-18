@@ -1,0 +1,13 @@
+{
+  "type": "artisan_machines:preserves_jar",
+  "ingredients": [
+    {
+      "item": "minecraft:cactus"
+    }
+  ],
+  "processing_hours": 2,
+  "result": {
+    "count": 1,
+    "id": "minecraft:sea_pickle"
+  }
+}
