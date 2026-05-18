@@ -42,9 +42,9 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     public void putItem(ItemStack itemStack)
     {
         items.add(itemStack.copyWithCount(1));
-        setChanged();
         if (!level.isClientSide)
             checkForRecipe();
+        setChanged();
     }
 
     public void harvest()
@@ -62,6 +62,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
 
         //set back to idle
         level.setBlockAndUpdate(getBlockPos(), level.getBlockState(worldPosition).setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.IDLE));
+        setChanged();
     }
 
     private void checkForRecipe()
@@ -77,6 +78,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
             //+1 as a recipe put 1 second before daily reset shouldn't be finished
             daysRemaining = recipe.getDays() + 1;
         }
+        setChanged();
     }
 
     public List<ItemStack> getItems()
@@ -87,11 +89,6 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     public ItemStack getResultItem()
     {
         return recipeResult;
-    }
-
-    public void setItems(List<ItemStack> list)
-    {
-        items = list;
     }
 
     public abstract RecipeType<?> getRecipeType();
@@ -218,6 +215,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     {
         if (tickOffset != -1) return tickOffset;
         tickOffset = level.getRandom().nextInt(ArtisanConfig.TICK_DELAY.get());
+        setChanged();
         return tickOffset;
     }
 }
