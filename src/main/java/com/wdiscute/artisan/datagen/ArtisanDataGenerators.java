@@ -42,8 +42,8 @@ public class ArtisanDataGenerators
 //        );
 
         //item models
-        //ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        //gen.addProvider(event.includeServer(), new DGSCItemModelProvider(output, existingFileHelper));
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        gen.addProvider(event.includeServer(), new DGArtisanItemModelProvider(output, existingFileHelper));
 
         //block tags
         //BlockTagsProvider btp = new DGSCBlocksTagsProvider(output, lookupProvider, existingFileHelper);
