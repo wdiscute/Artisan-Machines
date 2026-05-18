@@ -1,0 +1,19 @@
+{
+  "type": "artisan_machines:loom",
+  "ingredients": [
+    {
+      "tag": "minecraft:wool"
+    },
+    {
+      "tag": "minecraft:wool"
+    },
+    {
+      "tag": "minecraft:wool"
+    }
+  ],
+  "processing_days": 1,
+  "result": {
+    "count": 1,
+    "id": "minecraft:diamond"
+  }
+}

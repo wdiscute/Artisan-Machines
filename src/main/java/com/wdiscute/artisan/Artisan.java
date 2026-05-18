@@ -1,10 +1,7 @@
 package com.wdiscute.artisan;
 
 import com.mojang.logging.LogUtils;
-import com.wdiscute.artisan.registry.ArtisanBlockEntities;
-import com.wdiscute.artisan.registry.ArtisanBlocks;
-import com.wdiscute.artisan.registry.ArtisanCreativeModeTabs;
-import com.wdiscute.artisan.registry.ArtisanItems;
+import com.wdiscute.artisan.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -35,6 +32,8 @@ public class Artisan
         ArtisanItems.register(modEventBus);
         ArtisanBlocks.register(modEventBus);
         ArtisanBlockEntities.register(modEventBus);
+        ArtisanRecipeTypes.register(modEventBus);
+        ArtisanRecipeSerializers.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ArtisanConfig.SPEC);
         modContainer.registerConfig(ModConfig.Type.SERVER, ArtisanConfig.SPEC_SERVER);
