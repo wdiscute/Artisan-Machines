@@ -93,6 +93,17 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_coal", has(Items.COAL))
                 .save(output);
 
+        //deluxe worm farm
+        new ArtisanRecipeBuilder(
+                Items.SLIME_BALL.getDefaultInstance(),
+                DeluxeWormFarmRecipe::new,
+                8,
+                Ingredient.of(Items.DIRT)
+        )
+                .group("deluxe_worm_farm")
+                .unlockedBy("has_dirt", has(Items.DIRT))
+                .save(output);
+
 
     }
 }

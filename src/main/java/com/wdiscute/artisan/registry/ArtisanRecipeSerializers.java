@@ -20,6 +20,7 @@ public interface ArtisanRecipeSerializers
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> AGING_CASK = register("aging_cask", AgingCaskRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> ANCIENT_CASK = register("ancient_cask", AncientCaskRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> CRYSTALARIUM = register("crystalarium", CrystalariumRecipe::new);
+    Supplier<RecipeSerializer<AbstractArtisanRecipe>> DELUXE_WORM_FARM = register("deluxe_worm_farm", DeluxeWormFarmRecipe::new);
 
 
     static Supplier<RecipeSerializer<AbstractArtisanRecipe>> register(

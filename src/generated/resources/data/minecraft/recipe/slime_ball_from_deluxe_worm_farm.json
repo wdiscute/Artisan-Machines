@@ -1,0 +1,13 @@
+{
+  "type": "artisan_machines:deluxe_worm_farm",
+  "ingredients": [
+    {
+      "item": "minecraft:dirt"
+    }
+  ],
+  "processing_hours": 8,
+  "result": {
+    "count": 1,
+    "id": "minecraft:slime_ball"
+  }
+}

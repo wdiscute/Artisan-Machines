@@ -23,6 +23,7 @@ public interface ArtisanBlockEntities
     Supplier<BlockEntityType<?>> AGING_CASK = register("aging_cask", ArtisanBlocks.AGING_CASK, AgingCaskBlockEntity::new);
     Supplier<BlockEntityType<?>> ANCIENT_CASK = register("ancient_cask", ArtisanBlocks.ANCIENT_CASK, AncientCaskBlockEntity::new);
     Supplier<BlockEntityType<?>> CRYSTALARIUM = register("crystalarium", ArtisanBlocks.CRYSTALARIUM, CrystalariumBlockEntity::new);
+    Supplier<BlockEntityType<?>> DELUXE_WORM_FARM = register("deluxe_worm_farm", ArtisanBlocks.DELUXE_WORM_FARM, DeluxeWormFarmBlockEntity::new);
 
 
     static <T extends BlockEntity> Supplier<BlockEntityType<?>> register(String name, DeferredBlock<Block> block, BlockEntityType.BlockEntitySupplier<? extends T> factory)
