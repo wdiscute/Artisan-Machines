@@ -2,7 +2,6 @@ package com.wdiscute.artisan.machines;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
-import com.wdiscute.artisan.registry.ArtisanRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
@@ -104,9 +103,7 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
         if (blockState.getValue(STATE).equals(State.WORKING))
         {
             if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractDailyBlockEntity adbe)
-                player.displayClientMessage(Component.translatable("block.artisan_machines.machine.currently_making")
-                        .append(Component.translatable(adbe.getResultItem().getItem().getDescriptionId()))
-                        .append(Component.translatable("block.artisan_machines.machine.hours", adbe.getHoursRemaining())), true);
+                displayTimeRemainingClientMessage(player, adbe);
 
             return ItemInteractionResult.SUCCESS;
         }
@@ -125,6 +122,13 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
         if (result != null)
             return result;
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    public void displayTimeRemainingClientMessage(Player player, AbstractDailyBlockEntity adbe)
+    {
+        player.displayClientMessage(Component.translatable("block.artisan_machines.machine.currently_making")
+                .append(Component.translatable(adbe.getResultItem().getItem().getDescriptionId()))
+                .append(Component.translatable("block.artisan_machines.machine.hours", adbe.getHoursRemaining())), true);
     }
 
     @Override
