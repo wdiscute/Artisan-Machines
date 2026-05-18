@@ -14,5 +14,7 @@
   "block.artisan_machines.deluxe_worm_farm": "Deluxe Worm Farm",
   "block.artisan_machines.fish_smoker": "Fish Smoker",
   "block.artisan_machines.dehydrator": "Dehydrator",
-  "block.artisan_machines.mayonnaise_machine": "Mayonnaise Machine"
+  "block.artisan_machines.mayonnaise_machine": "Mayonnaise Machine",
+  "block.artisan_machines.preserves_jar": "Preserves Jar",
+  "block.artisan_machines.seed_maker": "Seed Maker"
 }

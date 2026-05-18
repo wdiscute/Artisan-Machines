@@ -26,6 +26,7 @@ public interface ArtisanBlocks
     DeferredBlock<Block> DEHYDRATOR = register("dehydrator", DehydratorBlock::new);
     DeferredBlock<Block> MAYONNAISE_MACHINE = register("mayonnaise_machine", MayonnaiseMachineBlock::new);
     DeferredBlock<Block> PRESERVES_JAR = register("preserves_jar", PreservesJarBlock::new);
+    DeferredBlock<Block> SEED_MAKER = register("seed_maker", SeedMakerBlock::new);
 
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> block)

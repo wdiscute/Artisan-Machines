@@ -1,0 +1,13 @@
+{
+  "type": "artisan_machines:seed_maker",
+  "ingredients": [
+    {
+      "item": "minecraft:short_grass"
+    }
+  ],
+  "processing_hours": 2,
+  "result": {
+    "count": 10,
+    "id": "minecraft:wheat_seeds"
+  }
+}

@@ -149,5 +149,21 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_cactus", has(Items.CACTUS))
                 .save(output);
 
+        //seed maker
+        ItemStack wheatSeeds = Items.WHEAT_SEEDS.getDefaultInstance();
+        wheatSeeds.setCount(10);
+        new ArtisanRecipeBuilder(
+                wheatSeeds,
+                SeedMakerRecipe::new,
+                2,
+                Ingredient.of(Items.SHORT_GRASS)
+        )
+                .group("seed_maker")
+                .unlockedBy("has_grass", has(Items.SHORT_GRASS))
+                .save(output);
+
+
+
+
     }
 }

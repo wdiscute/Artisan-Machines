@@ -25,6 +25,7 @@ public interface ArtisanRecipeSerializers
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> DEHYDRATOR = register("dehydrator", DehydratorRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> MAYONNAISE_MACHINE = register("mayonnaise_machine", MayonnaiseMachineRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> PRESERVES_JAR = register("preserves_jar", PreservesJarRecipe::new);
+    Supplier<RecipeSerializer<AbstractArtisanRecipe>> SEED_MAKER = register("seed_maker", SeedMakerRecipe::new);
 
 
     static Supplier<RecipeSerializer<AbstractArtisanRecipe>> register(
