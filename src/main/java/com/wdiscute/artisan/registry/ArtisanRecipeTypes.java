@@ -11,15 +11,20 @@ import java.util.function.Supplier;
 
 public interface ArtisanRecipeTypes
 {
-    DeferredRegister<RecipeType<?>> REGISTRY =
+    DeferredRegister<RecipeType<?>> RECIPE_TYPES =
             DeferredRegister.create(Registries.RECIPE_TYPE, Artisan.MOD_ID);
 
-    Supplier<RecipeType<AbstractArtisanRecipe>> LOOM = REGISTRY.register("loom", simple("loom"));
+    Supplier<RecipeType<AbstractArtisanRecipe>> LOOM = register("loom");
+    Supplier<RecipeType<AbstractArtisanRecipe>> CHEESE_PRESS = register("cheese_press");
+    Supplier<RecipeType<AbstractArtisanRecipe>> WINE_KEG = register("wine_keg");
 
 
 
 
-
+    static Supplier<RecipeType<AbstractArtisanRecipe>> register(String name)
+    {
+        return RECIPE_TYPES.register(name, simple(name));
+    }
 
     static Supplier<RecipeType<AbstractArtisanRecipe>> simple(String name)
     {
@@ -36,6 +41,6 @@ public interface ArtisanRecipeTypes
 
     static void register(IEventBus eventBus)
     {
-        REGISTRY.register(eventBus);
+        RECIPE_TYPES.register(eventBus);
     }
 }

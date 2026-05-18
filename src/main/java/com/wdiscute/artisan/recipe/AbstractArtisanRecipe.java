@@ -1,6 +1,5 @@
 package com.wdiscute.artisan.recipe;
 
-import com.wdiscute.artisan.registry.ArtisanRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
@@ -11,19 +10,19 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput>
+public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput>
 {
     RecipeType<?> type;
     List<Ingredient> ingredients;
     ItemStack result;
-    int processing_days;
+    int processing_hours;
 
-    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, ItemStack result, int processing_days)
+    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, ItemStack result, int processing_hours)
     {
         this.type = type;
         this.ingredients = ingredients;
         this.result = result;
-        this.processing_days = processing_days;
+        this.processing_hours = processing_hours;
     }
 
     @Override
@@ -53,9 +52,9 @@ public class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput>
         return true;
     }
 
-    public int getDays()
+    public int getHours()
     {
-        return processing_days;
+        return processing_hours;
     }
 
     @Override
@@ -73,12 +72,6 @@ public class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput>
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer()
-    {
-        return ArtisanRecipeSerializers.LOOM.get();
-    }
-
-    @Override
     public @NotNull RecipeType<?> getType()
     {
         return type;
@@ -86,7 +79,7 @@ public class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput>
 
     public interface Factory<T extends AbstractArtisanRecipe>
     {
-        T create(List<Ingredient> ingredients, ItemStack result, int processing_days);
+        T create(List<Ingredient> ingredients, ItemStack result, int processing_hours);
     }
 
 }

@@ -35,7 +35,7 @@ public interface ArtisanCreativeModeTabs
                         0xff344545,
                         0xffffffff,
                         ConglomerateOfItems.create()
-                                .add(ArtisanBlocks.LOOM)
+                                .add(ArtisanItems.ITEMS)
                 )
         );
 

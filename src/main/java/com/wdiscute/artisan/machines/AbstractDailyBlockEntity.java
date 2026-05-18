@@ -3,7 +3,6 @@ package com.wdiscute.artisan.machines;
 import com.wdiscute.artisan.ArtisanConfig;
 import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
 import com.wdiscute.artisan.recipe.ArtisanRecipeInput;
-import com.wdiscute.artisan.registry.ArtisanRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -29,8 +28,8 @@ import java.util.List;
 public abstract class AbstractDailyBlockEntity extends BlockEntity
 {
     private int tickOffset = -1;
-    private long lastTickDay = -1;
-    private int daysRemaining = -1;
+    private long lastTickHour = -1;
+    private int hoursRemaining = -1;
     private ItemStack recipeResult = ItemStack.EMPTY;
     private List<ItemStack> items = new ArrayList<>();
 
@@ -58,7 +57,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
         items.clear();
         recipeResult = ItemStack.EMPTY;
 
-        daysRemaining = -1;
+        hoursRemaining = -1;
 
         //set back to idle
         level.setBlockAndUpdate(getBlockPos(), level.getBlockState(worldPosition).setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.IDLE));
@@ -69,14 +68,14 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     {
         ArtisanRecipeInput input = new ArtisanRecipeInput(items);
 
-        var recipeFor = level.getRecipeManager().getRecipeFor(ArtisanRecipeTypes.LOOM.get(), input, level);
+        var recipeFor = level.getRecipeManager().getRecipeFor(getRecipeType(), input, level);
         if (recipeFor.isPresent())
         {
             AbstractArtisanRecipe recipe = recipeFor.get().value();
             recipeResult = recipe.getResultItem(level.registryAccess());
             level.setBlockAndUpdate(worldPosition, getBlockState().setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.WORKING));
             //+1 as a recipe put 1 second before daily reset shouldn't be finished
-            daysRemaining = recipe.getDays() + 1;
+            hoursRemaining = recipe.getHours() + 1;
         }
         setChanged();
     }
@@ -91,7 +90,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
         return recipeResult;
     }
 
-    public abstract RecipeType<?> getRecipeType();
+    public abstract RecipeType<? extends AbstractArtisanRecipe> getRecipeType();
 
     /**
      * ticks with an offset based on the tick delay config - does NOT tick every tick
@@ -102,23 +101,24 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     }
 
     /**
-     * ticks daily, adds one to last tick day so if the machine was unloaded all days are ticked
+     * ticks daily, adds one to last tick hour so if the machine was unloaded all days are ticked
      */
-    public void dailyTick(long day)
+    public void hourlyTick(long hour)
     {
-        System.out.println("daily tick on day " + lastTickDay);
-        if (lastTickDay == -1)
-            lastTickDay = day;
+        System.out.println("Hourly tick on hour " + lastTickHour + " for machine " + this);
+        if (lastTickHour == -1)
+            lastTickHour = hour;
         else
-            lastTickDay++;
+            lastTickHour++;
 
-        if(level.getBlockState(worldPosition).getValue(AbstractDailyBlock.STATE).equals(AbstractDailyBlock.State.WORKING))
-            daysRemaining--;
+        //if working
+        if (level.getBlockState(worldPosition).getValue(AbstractDailyBlock.STATE).equals(AbstractDailyBlock.State.WORKING))
+            hoursRemaining--;
 
-        if(daysRemaining == 0)
-        {
+        //if recipe finished
+        if (hoursRemaining == 0)
             level.setBlockAndUpdate(worldPosition, getBlockState().setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.HARVESTABLE));
-        }
+
         setChanged();
     }
 
@@ -126,7 +126,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
-        tag.putLong("last_tick_day", lastTickDay);
+        tag.putLong("last_tick_hour", lastTickHour);
         saveAllItems(tag, registries);
     }
 
@@ -161,7 +161,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
-        lastTickDay = tag.getLong("last_tick_day");
+        lastTickHour = tag.getLong("last_tick_hour");
         loadAllItems(tag, registries);
     }
 
@@ -194,9 +194,13 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
         loadAllItems(pkt.getTag(), lookupProvider);
     }
 
-    public static <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level)
+    public static <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state)
     {
+        //don't tick on click
         if (level.isClientSide) return null;
+
+        //only tick for working machines
+        if (!state.getValue(AbstractDailyBlock.STATE).equals(AbstractDailyBlock.State.WORKING)) return null;
 
         return (level0, pos0, state0, blockEntity) ->
         {
@@ -206,8 +210,8 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
             if (level.getGameTime() + dbe.getTickOffset(level) % ArtisanConfig.TICK_DELAY.get() == 0) dbe.tick();
 
             //daily tick
-            long day = (level.getGameTime() + dbe.getTickOffset(level)) / 24000;
-            if (dbe.lastTickDay < day) dbe.dailyTick(day);
+            long hour = (level.getGameTime() + dbe.getTickOffset(level)) / 1000;
+            if (dbe.lastTickHour < hour) dbe.hourlyTick(hour);
         };
     }
 

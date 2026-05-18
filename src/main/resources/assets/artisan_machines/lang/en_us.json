@@ -2,5 +2,8 @@
   "creativetab.artisan_machines.artisan_machines": "Artisan Machines",
   "creativetab.artisan_machines.artisan_machines.machines": "Machines",
 
-  "block.artisan_machines.machine.currently_making": "Currently Making: "
+  "block.artisan_machines.machine.currently_making": "Currently Making: ",
+
+  "block.artisan_machines.loom": "Loom",
+  "block.artisan_machines.cheese_press": "Cheese Press"
 }

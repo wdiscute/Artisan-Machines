@@ -69,12 +69,12 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
                 if (level.getBlockEntity(pos) instanceof AbstractDailyBlockEntity adbe)
                 {
                     //get all recipes using item
-                    var recipesUsingItem = level.getRecipeManager().getAllRecipesFor(ArtisanRecipeTypes.LOOM.get())
+                    var recipesUsingItem = level.getRecipeManager().getAllRecipesFor(adbe.getRecipeType())
                             .stream().filter(holder -> holder.value().getIngredients()
                                     .stream().anyMatch(o -> o.test(stack))).toList();
 
                     //check every recipe if item "fits" into any recipe
-                    for (RecipeHolder<AbstractArtisanRecipe> abstractArtisanRecipeRecipeHolder : recipesUsingItem)
+                    for (RecipeHolder<? extends AbstractArtisanRecipe> abstractArtisanRecipeRecipeHolder : recipesUsingItem)
                     {
                         //get all ingredients of recipe
                         List<Ingredient> ingredients = new ArrayList<>(abstractArtisanRecipeRecipeHolder.value().getIngredients());
@@ -143,7 +143,7 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
-        return AbstractDailyBlockEntity.getTicker(level);
+        return AbstractDailyBlockEntity.getTicker(level, state);
     }
 
     public enum State implements StringRepresentable

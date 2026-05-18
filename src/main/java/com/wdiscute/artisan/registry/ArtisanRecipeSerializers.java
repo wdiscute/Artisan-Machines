@@ -1,9 +1,7 @@
 package com.wdiscute.artisan.registry;
 
 import com.wdiscute.artisan.Artisan;
-import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
-import com.wdiscute.artisan.recipe.ArtisanSerializer;
-import com.wdiscute.artisan.recipe.LoomRecipe;
+import com.wdiscute.artisan.recipe.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.bus.api.IEventBus;
@@ -16,10 +14,16 @@ public interface ArtisanRecipeSerializers
     DeferredRegister<RecipeSerializer<?>> REGISTRY =
             DeferredRegister.create(Registries.RECIPE_SERIALIZER, Artisan.MOD_ID);
 
-     Supplier<RecipeSerializer<AbstractArtisanRecipe>> LOOM = REGISTRY.register("loom", () -> new ArtisanSerializer<>(LoomRecipe::new));
+    Supplier<RecipeSerializer<AbstractArtisanRecipe>> LOOM = register("loom", LoomRecipe::new);
+    Supplier<RecipeSerializer<AbstractArtisanRecipe>> CHEESE_PRESS = register("cheese_press", CheesePressRecipe::new);
+    Supplier<RecipeSerializer<AbstractArtisanRecipe>> WINE_KEG = register("wine_keg", WineKegRecipe::new);
 
 
-
+    static Supplier<RecipeSerializer<AbstractArtisanRecipe>> register(
+            String name, AbstractArtisanRecipe.Factory<AbstractArtisanRecipe> factory)
+    {
+        return REGISTRY.register(name, () -> new ArtisanSerializer<>(factory));
+    }
 
     static void register(IEventBus eventBus)
     {

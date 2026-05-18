@@ -7,11 +7,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class LoomBlockEntity extends AbstractDailyBlockEntity
+public class CheesePressBlockEntity extends AbstractDailyBlockEntity
 {
-    public LoomBlockEntity(BlockPos blockPos, BlockState blockState)
+    public CheesePressBlockEntity(BlockPos blockPos, BlockState blockState)
     {
-        super(ArtisanBlockEntities.LOOM.get(), blockPos, blockState);
+        super(ArtisanBlockEntities.CHEESE_PRESS.get(), blockPos, blockState);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class LoomBlockEntity extends AbstractDailyBlockEntity
     @Override
     public RecipeType<? extends AbstractArtisanRecipe> getRecipeType()
     {
-        return ArtisanRecipeTypes.LOOM.get();
+        return ArtisanRecipeTypes.CHEESE_PRESS.get();
     }
 
     @Override
