@@ -22,6 +22,7 @@ public interface ArtisanBlockEntities
     Supplier<BlockEntityType<?>> WINE_KEG = register("wine_keg", ArtisanBlocks.WINE_KEG, WineKegBlockEntity::new);
     Supplier<BlockEntityType<?>> AGING_CASK = register("aging_cask", ArtisanBlocks.AGING_CASK, AgingCaskBlockEntity::new);
     Supplier<BlockEntityType<?>> ANCIENT_CASK = register("ancient_cask", ArtisanBlocks.ANCIENT_CASK, AncientCaskBlockEntity::new);
+    Supplier<BlockEntityType<?>> CRYSTALARIUM = register("crystalarium", ArtisanBlocks.CRYSTALARIUM, CrystalariumBlockEntity::new);
 
 
     static <T extends BlockEntity> Supplier<BlockEntityType<?>> register(String name, DeferredBlock<Block> block, BlockEntityType.BlockEntitySupplier<? extends T> factory)

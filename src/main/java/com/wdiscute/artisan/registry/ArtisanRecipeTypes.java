@@ -19,6 +19,7 @@ public interface ArtisanRecipeTypes
     Supplier<RecipeType<AbstractArtisanRecipe>> WINE_KEG = register("wine_keg");
     Supplier<RecipeType<AbstractArtisanRecipe>> AGING_CASK = register("aging_cask");
     Supplier<RecipeType<AbstractArtisanRecipe>> ANCIENT_CASK = register("ancient_cask");
+    Supplier<RecipeType<AbstractArtisanRecipe>> CRYSTALARIUM = register("crystalarium");
 
 
 

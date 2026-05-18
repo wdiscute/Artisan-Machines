@@ -1,0 +1,13 @@
+{
+  "type": "artisan_machines:crystalarium",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "processing_hours": 8,
+  "result": {
+    "count": 1,
+    "id": "minecraft:diamond"
+  }
+}

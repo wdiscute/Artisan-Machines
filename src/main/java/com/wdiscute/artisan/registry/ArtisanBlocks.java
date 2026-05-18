@@ -20,6 +20,7 @@ public interface ArtisanBlocks
     DeferredBlock<Block> WINE_KEG = register("wine_keg", WineKegBlock::new);
     DeferredBlock<Block> AGING_CASK = register("aging_cask", AgingCaskBlock::new);
     DeferredBlock<Block> ANCIENT_CASK = register("ancient_cask", AncientCaskBlock::new);
+    DeferredBlock<Block> CRYSTALARIUM = register("crystalarium", CrystalariumBlock::new);
 
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> block)

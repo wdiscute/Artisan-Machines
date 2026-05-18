@@ -82,5 +82,17 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_big_dripleaf", has(Items.BIG_DRIPLEAF))
                 .save(output);
 
+        //crystalarium
+        new ArtisanRecipeBuilder(
+                Items.DIAMOND.getDefaultInstance(),
+                CrystalariumRecipe::new,
+                8,
+                Ingredient.of(Items.COAL)
+        )
+                .group("crystalarium")
+                .unlockedBy("has_coal", has(Items.COAL))
+                .save(output);
+
+
     }
 }
