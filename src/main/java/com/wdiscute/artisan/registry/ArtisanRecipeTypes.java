@@ -22,6 +22,7 @@ public interface ArtisanRecipeTypes
     Supplier<RecipeType<AbstractArtisanRecipe>> CRYSTALARIUM = register("crystalarium");
     Supplier<RecipeType<AbstractArtisanRecipe>> DELUXE_WORM_FARM = register("deluxe_worm_farm");
     Supplier<RecipeType<AbstractArtisanRecipe>> FISH_SMOKER = register("fish_smoker");
+    Supplier<RecipeType<AbstractArtisanRecipe>> DEHYDRATOR = register("dehydrator");
 
 
 

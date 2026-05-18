@@ -23,6 +23,7 @@ public interface ArtisanBlocks
     DeferredBlock<Block> CRYSTALARIUM = register("crystalarium", CrystalariumBlock::new);
     DeferredBlock<Block> DELUXE_WORM_FARM = register("deluxe_worm_farm", DeluxeWormFarmBlock::new);
     DeferredBlock<Block> FISH_SMOKER = register("fish_smoker", FishSmokerBlock::new);
+    DeferredBlock<Block> DEHYDRATOR = register("dehydrator", DehydratorBlock::new);
 
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> block)

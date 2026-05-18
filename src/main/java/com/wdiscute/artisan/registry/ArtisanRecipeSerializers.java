@@ -22,6 +22,7 @@ public interface ArtisanRecipeSerializers
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> CRYSTALARIUM = register("crystalarium", CrystalariumRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> DELUXE_WORM_FARM = register("deluxe_worm_farm", DeluxeWormFarmRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> FISH_SMOKER = register("fish_smoker", FishSmokerRecipe::new);
+    Supplier<RecipeSerializer<AbstractArtisanRecipe>> DEHYDRATOR = register("dehydrator", DehydratorRecipe::new);
 
 
     static Supplier<RecipeSerializer<AbstractArtisanRecipe>> register(

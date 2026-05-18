@@ -115,5 +115,21 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_cod", has(Items.COD))
                 .save(output);
 
+
+        //dehydrator
+        new ArtisanRecipeBuilder(
+                Items.BONE.getDefaultInstance(),
+                DehydratorRecipe::new,
+                8,
+                Ingredient.of(Items.COD)
+        )
+                .group("dehydrator")
+                .unlockedBy("has_cod", has(Items.COD))
+                .save(output);
+
+
+
+
+
     }
 }
