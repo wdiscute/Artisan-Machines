@@ -1,0 +1,13 @@
+{
+  "type": "artisan_machines:bait_maker",
+  "ingredients": [
+    {
+      "item": "minecraft:salmon"
+    }
+  ],
+  "processing_hours": 2,
+  "result": {
+    "count": 1,
+    "id": "minecraft:bone"
+  }
+}

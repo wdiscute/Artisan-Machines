@@ -173,6 +173,17 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_stone", has(Items.STONE))
                 .save(output);
 
+        //bait maker
+        new ArtisanRecipeBuilder(
+                Items.BONE.getDefaultInstance(),
+                BaitMakerRecipe::new,
+                2,
+                Ingredient.of(Items.SALMON)
+        )
+                .group("bait_maker")
+                .unlockedBy("has_salmon", has(Items.SALMON))
+                .save(output);
+
 
     }
 }

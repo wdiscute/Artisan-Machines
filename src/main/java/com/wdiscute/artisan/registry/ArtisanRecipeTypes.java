@@ -27,6 +27,7 @@ public interface ArtisanRecipeTypes
     Supplier<RecipeType<AbstractArtisanRecipe>> PRESERVES_JAR = register("preserves_jar");
     Supplier<RecipeType<AbstractArtisanRecipe>> SEED_MAKER = register("seed_maker");
     Supplier<RecipeType<AbstractArtisanRecipe>> RECYCLING_MACHINE = register("recycling_machine");
+    Supplier<RecipeType<AbstractArtisanRecipe>> BAIT_MAKER = register("bait_maker");
 
 
 

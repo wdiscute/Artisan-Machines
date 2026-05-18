@@ -17,5 +17,6 @@
   "block.artisan_machines.mayonnaise_machine": "Mayonnaise Machine",
   "block.artisan_machines.preserves_jar": "Preserves Jar",
   "block.artisan_machines.seed_maker": "Seed Maker",
-  "block.artisan_machines.recycling_machine": "Recycling Machine"
+  "block.artisan_machines.recycling_machine": "Recycling Machine",
+  "block.artisan_machines.bait_maker": "Bait Maker"
 }
