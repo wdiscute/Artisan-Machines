@@ -17,7 +17,6 @@ public class LoomBlockEntity extends AbstractDailyBlockEntity
     public void tick()
     {
         super.tick();
-        System.out.println("tick");
     }
 
     @Override
@@ -30,6 +29,5 @@ public class LoomBlockEntity extends AbstractDailyBlockEntity
     public void dailyTick(long day)
     {
         super.dailyTick(day);
-        System.out.println("daily");
     }
 }

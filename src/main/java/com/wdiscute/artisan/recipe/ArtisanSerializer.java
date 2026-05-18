@@ -3,6 +3,7 @@ package com.wdiscute.artisan.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -13,13 +14,11 @@ import java.util.List;
 
 public class ArtisanSerializer<T extends AbstractArtisanRecipe> implements RecipeSerializer<T>
 {
-    private final AbstractArtisanRecipe.Factory<T> factory;
     private final MapCodec<T> codec;
     private final StreamCodec<RegistryFriendlyByteBuf, T> streamCodec;
 
     public ArtisanSerializer(AbstractArtisanRecipe.Factory<T> factory)
     {
-        this.factory = factory;
         this.codec = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
                                 Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.ingredients),
@@ -29,22 +28,12 @@ public class ArtisanSerializer<T extends AbstractArtisanRecipe> implements Recip
                         .apply(instance, factory::create)
         );
 
-        this.streamCodec = StreamCodec.of(this::toNetwork, this::fromNetwork);
-    }
-
-    private T fromNetwork(RegistryFriendlyByteBuf buffer)
-    {
-        List<Ingredient> ingredient = Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()).decode(buffer);
-        ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buffer);
-        int days = buffer.readVarInt();
-        return this.factory.create(ingredient, itemstack, days);
-    }
-
-    private void toNetwork(RegistryFriendlyByteBuf buffer, T recipe)
-    {
-        Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()).encode(buffer, recipe.ingredients);
-        ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
-        buffer.writeFloat(recipe.processing_days);
+        this.streamCodec = StreamCodec.composite(
+                Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.ingredients,
+                ItemStack.STREAM_CODEC, o -> o.result,
+                ByteBufCodecs.INT, o -> o.processing_days,
+                factory::create
+        );
     }
 
     @Override

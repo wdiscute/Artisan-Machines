@@ -3,11 +3,8 @@ package com.wdiscute.artisan.recipe;
 import com.wdiscute.artisan.registry.ArtisanRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,6 +51,11 @@ public class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput>
     public boolean canCraftInDimensions(int width, int height)
     {
         return true;
+    }
+
+    public int getDays()
+    {
+        return processing_days;
     }
 
     @Override

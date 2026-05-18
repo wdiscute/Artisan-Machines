@@ -1,11 +1,18 @@
 package com.wdiscute.artisan.machines;
 
 import com.wdiscute.artisan.ArtisanConfig;
+import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
+import com.wdiscute.artisan.recipe.ArtisanRecipeInput;
+import com.wdiscute.artisan.registry.ArtisanRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -13,6 +20,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +30,8 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
 {
     private int tickOffset = -1;
     private long lastTickDay = -1;
+    private int daysRemaining = -1;
+    private ItemStack recipeResult = ItemStack.EMPTY;
     private List<ItemStack> items = new ArrayList<>();
 
     public AbstractDailyBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState)
@@ -31,13 +42,51 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     public void putItem(ItemStack itemStack)
     {
         items.add(itemStack.copyWithCount(1));
-        if (itemStack.getCount() > 1)
-            itemStack.shrink(1);
+        setChanged();
+        if (!level.isClientSide)
+            checkForRecipe();
+    }
+
+    public void harvest()
+    {
+        //spawn result item
+        Vec3 vec3 = Vec3.atLowerCornerWithOffset(worldPosition, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
+        ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), getResultItem());
+        itementity.setDefaultPickUpDelay();
+        level.addFreshEntity(itementity);
+
+        items.clear();
+        recipeResult = ItemStack.EMPTY;
+
+        daysRemaining = -1;
+
+        //set back to idle
+        level.setBlockAndUpdate(getBlockPos(), level.getBlockState(worldPosition).setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.IDLE));
+    }
+
+    private void checkForRecipe()
+    {
+        ArtisanRecipeInput input = new ArtisanRecipeInput(items);
+
+        var recipeFor = level.getRecipeManager().getRecipeFor(ArtisanRecipeTypes.LOOM.get(), input, level);
+        if (recipeFor.isPresent())
+        {
+            AbstractArtisanRecipe recipe = recipeFor.get().value();
+            recipeResult = recipe.getResultItem(level.registryAccess());
+            level.setBlockAndUpdate(worldPosition, getBlockState().setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.WORKING));
+            //+1 as a recipe put 1 second before daily reset shouldn't be finished
+            daysRemaining = recipe.getDays() + 1;
+        }
     }
 
     public List<ItemStack> getItems()
     {
         return items;
+    }
+
+    public ItemStack getResultItem()
+    {
+        return recipeResult;
     }
 
     public void setItems(List<ItemStack> list)
@@ -52,7 +101,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
      */
     public void tick()
     {
-
+        System.out.println("tick");
     }
 
     /**
@@ -60,10 +109,19 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
      */
     public void dailyTick(long day)
     {
+        System.out.println("daily tick on day " + lastTickDay);
         if (lastTickDay == -1)
             lastTickDay = day;
         else
             lastTickDay++;
+
+        if(level.getBlockState(worldPosition).getValue(AbstractDailyBlock.STATE).equals(AbstractDailyBlock.State.WORKING))
+            daysRemaining--;
+
+        if(daysRemaining == 0)
+        {
+            level.setBlockAndUpdate(worldPosition, getBlockState().setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.HARVESTABLE));
+        }
     }
 
     @Override
@@ -89,6 +147,14 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
             }
         }
 
+        //save recipe result
+        if (!recipeResult.isEmpty())
+        {
+            CompoundTag compoundtag = new CompoundTag();
+            compoundtag.putByte("Slot", (byte) 99);
+            listtag.add(recipeResult.save(levelRegistry, compoundtag));
+        }
+
         tag.put("Items", listtag);
         return tag;
     }
@@ -103,19 +169,32 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
 
     public void loadAllItems(CompoundTag tag, HolderLookup.Provider levelRegistry)
     {
+        items.clear();
         ListTag listtag = tag.getList("Items", 10);
 
         for (int i = 0; i < listtag.size(); i++)
         {
             CompoundTag compoundtag = listtag.getCompound(i);
             int j = compoundtag.getByte("Slot") & 255;
-            if (j >= 0 && j < items.size())
-            {
-                items.set(j, ItemStack.parse(levelRegistry, compoundtag).orElse(ItemStack.EMPTY));
-            }
+            if (j == (byte) 99)
+                recipeResult = ItemStack.parse(levelRegistry, compoundtag).orElse(ItemStack.EMPTY);
+            else
+                items.add(ItemStack.parse(levelRegistry, compoundtag).orElse(ItemStack.EMPTY));
         }
     }
 
+    @Override
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket()
+    {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider)
+    {
+        super.onDataPacket(net, pkt, lookupProvider);
+        loadAllItems(pkt.getTag(), lookupProvider);
+    }
 
     public static <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level)
     {
@@ -140,5 +219,4 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
         tickOffset = level.getRandom().nextInt(ArtisanConfig.TICK_DELAY.get());
         return tickOffset;
     }
-
 }
