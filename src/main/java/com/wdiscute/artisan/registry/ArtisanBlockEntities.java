@@ -26,6 +26,7 @@ public interface ArtisanBlockEntities
     Supplier<BlockEntityType<?>> DELUXE_WORM_FARM = register("deluxe_worm_farm", ArtisanBlocks.DELUXE_WORM_FARM, DeluxeWormFarmBlockEntity::new);
     Supplier<BlockEntityType<?>> FISH_SMOKER = register("fish_smoker", ArtisanBlocks.FISH_SMOKER, FishSmokerBlockEntity::new);
     Supplier<BlockEntityType<?>> DEHYDRATOR = register("dehydrator", ArtisanBlocks.DEHYDRATOR, DehydratorBlockEntity::new);
+    Supplier<BlockEntityType<?>> MAYONNAISE_MACHINE = register("mayonnaise_machine", ArtisanBlocks.MAYONNAISE_MACHINE, MayonnaiseMachineBlockEntity::new);
 
 
     static <T extends BlockEntity> Supplier<BlockEntityType<?>> register(String name, DeferredBlock<Block> block, BlockEntityType.BlockEntitySupplier<? extends T> factory)

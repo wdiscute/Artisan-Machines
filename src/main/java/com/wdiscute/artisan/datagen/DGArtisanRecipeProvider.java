@@ -127,7 +127,16 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_cod", has(Items.COD))
                 .save(output);
 
-
+        //mayonnaise machine
+        new ArtisanRecipeBuilder(
+                Items.WHITE_BANNER.getDefaultInstance(),
+                MayonnaiseMachineRecipe::new,
+                2,
+                Ingredient.of(Items.EGG)
+        )
+                .group("mayonnaise_machine")
+                .unlockedBy("has_egg", has(Items.EGG))
+                .save(output);
 
 
 
