@@ -122,6 +122,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
         {
             level.setBlockAndUpdate(worldPosition, getBlockState().setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.HARVESTABLE));
         }
+        setChanged();
     }
 
     @Override
