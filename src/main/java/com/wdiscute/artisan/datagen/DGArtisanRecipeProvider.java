@@ -104,6 +104,16 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_dirt", has(Items.DIRT))
                 .save(output);
 
+        //fish smoker
+        new ArtisanRecipeBuilder(
+                Items.COOKED_COD.getDefaultInstance(),
+                FishSmokerRecipe::new,
+                8,
+                Ingredient.of(Items.COD)
+        )
+                .group("fish_smoker")
+                .unlockedBy("has_cod", has(Items.COD))
+                .save(output);
 
     }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "artisan_machines:fish_smoker",
+  "ingredients": [
+    {
+      "item": "minecraft:cod"
+    }
+  ],
+  "processing_hours": 8,
+  "result": {
+    "count": 1,
+    "id": "minecraft:cooked_cod"
+  }
+}
