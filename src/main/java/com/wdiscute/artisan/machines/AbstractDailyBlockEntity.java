@@ -137,6 +137,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     {
         super.saveAdditional(tag, registries);
         tag.putLong("last_tick_hour", lastTickHour);
+        tag.putInt("hours_remaining", hoursRemaining);
         saveAllItems(tag, registries);
     }
 
@@ -172,6 +173,7 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
     {
         super.loadAdditional(tag, registries);
         lastTickHour = tag.getLong("last_tick_hour");
+        hoursRemaining = tag.getInt("hours_remaining");
         loadAllItems(tag, registries);
     }
 
@@ -229,7 +231,8 @@ public abstract class AbstractDailyBlockEntity extends BlockEntity
 
             //daily tick
             long hour = (level.getGameTime() + dbe.getTickOffset(level)) / 1000;
-            if (dbe.lastTickHour < hour) dbe.hourlyTick(hour, state);
+            if (dbe.lastTickHour < hour)
+                dbe.hourlyTick(hour, state);
         };
     }
 }
