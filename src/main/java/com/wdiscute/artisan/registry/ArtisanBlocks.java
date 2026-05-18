@@ -2,6 +2,7 @@ package com.wdiscute.artisan.registry;
 
 import com.wdiscute.artisan.Artisan;
 import com.wdiscute.artisan.machines.*;
+import com.wdiscute.artisan.recipe.OilMakerRecipe;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -29,6 +30,7 @@ public interface ArtisanBlocks
     DeferredBlock<Block> SEED_MAKER = register("seed_maker", SeedMakerBlock::new);
     DeferredBlock<Block> RECYCLING_MACHINE = register("recycling_machine", RecyclingMachineBlock::new);
     DeferredBlock<Block> BAIT_MAKER = register("bait_maker", BaitMakerBlock::new);
+    DeferredBlock<Block> OIL_MAKER = register("oil_maker", OilMakerBlock::new);
 
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> block)

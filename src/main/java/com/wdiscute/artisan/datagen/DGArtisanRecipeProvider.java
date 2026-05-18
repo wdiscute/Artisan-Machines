@@ -184,6 +184,17 @@ public class DGArtisanRecipeProvider extends RecipeProvider
                 .unlockedBy("has_salmon", has(Items.SALMON))
                 .save(output);
 
+        //oil maker
+        new ArtisanRecipeBuilder(
+                Items.BLACK_CANDLE.getDefaultInstance(),
+                OilMakerRecipe::new,
+                2,
+                Ingredient.of(Items.TROPICAL_FISH)
+        )
+                .group("oil_maker")
+                .unlockedBy("has_tropical_fish", has(Items.TROPICAL_FISH))
+                .save(output);
+
 
     }
 }

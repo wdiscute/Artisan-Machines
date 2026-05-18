@@ -18,5 +18,6 @@
   "block.artisan_machines.preserves_jar": "Preserves Jar",
   "block.artisan_machines.seed_maker": "Seed Maker",
   "block.artisan_machines.recycling_machine": "Recycling Machine",
-  "block.artisan_machines.bait_maker": "Bait Maker"
+  "block.artisan_machines.bait_maker": "Bait Maker",
+  "block.artisan_machines.oil_maker": "Oil Maker"
 }

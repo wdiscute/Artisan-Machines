@@ -28,6 +28,7 @@ public interface ArtisanRecipeTypes
     Supplier<RecipeType<AbstractArtisanRecipe>> SEED_MAKER = register("seed_maker");
     Supplier<RecipeType<AbstractArtisanRecipe>> RECYCLING_MACHINE = register("recycling_machine");
     Supplier<RecipeType<AbstractArtisanRecipe>> BAIT_MAKER = register("bait_maker");
+    Supplier<RecipeType<AbstractArtisanRecipe>> OIL_MAKER = register("oil_maker");
 
 
 
