@@ -3,6 +3,7 @@ package com.wdiscute.artisan.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.wdiscute.artisan.ChancedStack;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -19,7 +20,7 @@ public class ArtisanSerializer<T extends AbstractArtisanRecipe> implements Recip
         this.codec = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
                                 Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.ingredients),
-                                ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+                                ChancedStack.CODEC.listOf().fieldOf("chanced_results").forGetter(recipe -> recipe.result),
                                 Codec.INT.fieldOf("processing_hours").forGetter(recipe -> recipe.processing_hours)
                         )
                         .apply(instance, factory::create)
@@ -27,7 +28,7 @@ public class ArtisanSerializer<T extends AbstractArtisanRecipe> implements Recip
 
         this.streamCodec = StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.ingredients,
-                ItemStack.STREAM_CODEC, o -> o.result,
+                ChancedStack.LIST_STREAM_CODEC, o -> o.result,
                 ByteBufCodecs.INT, o -> o.processing_hours,
                 factory::create
         );

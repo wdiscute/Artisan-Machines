@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class FishSmokerBlockEntity extends AbstractDailyBlockEntity
+public class FishSmokerBlockEntity extends AbstractMachineBlockEntity
 {
     public FishSmokerBlockEntity(BlockPos blockPos, BlockState blockState)
     {

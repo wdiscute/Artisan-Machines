@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class DeluxeWormFarmBlockEntity extends AbstractDailyBlockEntity
+public class DeluxeWormFarmBlockEntity extends AbstractMachineBlockEntity
 {
     public DeluxeWormFarmBlockEntity(BlockPos blockPos, BlockState blockState)
     {

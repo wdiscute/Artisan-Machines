@@ -41,7 +41,7 @@ public interface ArtisanCreativeModeTabs
 
 
         Supplier<CreativeModeTab> ARTISAN_MACHINES = CREATIVE_MODE_TABS.register(
-                "artisan_machines", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ArtisanBlocks.LOOM))
+                "artisan_machines", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ArtisanBlocks.CHEESE_PRESS))
                         .title(Component.translatable("creativetab.artisan_machines.artisan_machines"))
                         .displayItems((itemDisplayParameters, output) ->
                         {

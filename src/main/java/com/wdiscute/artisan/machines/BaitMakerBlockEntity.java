@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BaitMakerBlockEntity extends AbstractDailyBlockEntity
+public class BaitMakerBlockEntity extends AbstractMachineBlockEntity
 {
     public BaitMakerBlockEntity(BlockPos blockPos, BlockState blockState)
     {

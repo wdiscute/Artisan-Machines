@@ -2,6 +2,9 @@ package com.wdiscute.artisan;
 
 import com.mojang.logging.LogUtils;
 import com.wdiscute.artisan.registry.*;
+import com.wdiscute.artisan.upgrades.AbstractUpgrade;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -10,6 +13,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.registries.RegistryBuilder;
 import org.slf4j.Logger;
 
 import java.util.Random;
@@ -26,6 +30,15 @@ public class Artisan
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
+    public static final ResourceKey<Registry<AbstractUpgrade>> UPGRADE =
+            ResourceKey.createRegistryKey(Artisan.rl("upgrade"));
+
+    //registry
+    public static final Registry<AbstractUpgrade> UPGRADE_REGISTRY = new RegistryBuilder<>(UPGRADE)
+            .sync(true)
+            .defaultKey(Artisan.rl("empty"))
+            .create();
+
     public Artisan(IEventBus modEventBus, ModContainer modContainer)
     {
         ArtisanItems.register(modEventBus);
@@ -34,6 +47,7 @@ public class Artisan
         ArtisanCreativeModeTabs.register(modEventBus);
         ArtisanRecipeTypes.register(modEventBus);
         ArtisanRecipeSerializers.register(modEventBus);
+        ArtisanUpgrades.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ArtisanConfig.SPEC);
         modContainer.registerConfig(ModConfig.Type.SERVER, ArtisanConfig.SPEC_SERVER);

@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class LoomBlockEntity extends AbstractDailyBlockEntity
+public class LoomBlockEntity extends AbstractMachineBlockEntity
 {
     public LoomBlockEntity(BlockPos blockPos, BlockState blockState)
     {

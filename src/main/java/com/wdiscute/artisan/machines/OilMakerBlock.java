@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class OilMakerBlock extends AbstractDailyBlock
+public class OilMakerBlock extends AbstractMachineBlock
 {
     public OilMakerBlock()
     {

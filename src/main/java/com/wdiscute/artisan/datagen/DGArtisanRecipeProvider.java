@@ -1,9 +1,13 @@
 package com.wdiscute.artisan.datagen;
 
+import com.wdiscute.artisan.ChancedStack;
 import com.wdiscute.artisan.recipe.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.commands.data.DataCommands;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -117,8 +121,14 @@ public class DGArtisanRecipeProvider extends RecipeProvider
 
 
         //dehydrator
+        ItemStack shinyBone = Items.BONE.getDefaultInstance();
+        shinyBone.setCount(2);
+        shinyBone.set(DataComponents.CUSTOM_NAME, Component.literal("Super Shiny Bone"));
         new ArtisanRecipeBuilder(
-                Items.BONE.getDefaultInstance(),
+                List.of(
+                        new ChancedStack(Items.BONE.getDefaultInstance(), 1),
+                        new ChancedStack(shinyBone, 0.1f)
+                ),
                 DehydratorRecipe::new,
                 8,
                 Ingredient.of(Items.COD)

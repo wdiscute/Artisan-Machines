@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class WineKegBlockEntity extends AbstractDailyBlockEntity
+public class WineKegBlockEntity extends AbstractMachineBlockEntity
 {
     public WineKegBlockEntity(BlockPos blockPos, BlockState blockState)
     {

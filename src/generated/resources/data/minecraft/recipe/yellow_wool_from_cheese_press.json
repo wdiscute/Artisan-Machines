@@ -1,13 +1,18 @@
 {
   "type": "artisan_machines:cheese_press",
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:yellow_wool"
+      }
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:milk_bucket"
     }
   ],
-  "processing_hours": 8,
-  "result": {
-    "count": 1,
-    "id": "minecraft:yellow_wool"
-  }
+  "processing_hours": 8
 }

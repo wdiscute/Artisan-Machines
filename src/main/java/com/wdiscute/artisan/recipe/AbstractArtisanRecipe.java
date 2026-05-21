@@ -1,9 +1,8 @@
 package com.wdiscute.artisan.recipe;
 
+import com.wdiscute.artisan.ChancedStack;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -16,14 +15,22 @@ public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput
 {
     RecipeType<?> type;
     List<Ingredient> ingredients;
-    ItemStack result;
+    List<ChancedStack> result;
     int processing_hours;
+
+    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours)
+    {
+        this.type = type;
+        this.ingredients = ingredients;
+        this.result = result;
+        this.processing_hours = processing_hours;
+    }
 
     public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, ItemStack result, int processing_hours)
     {
         this.type = type;
         this.ingredients = ingredients;
-        this.result = result;
+        this.result = List.of(new ChancedStack(result, 1));
         this.processing_hours = processing_hours;
     }
 
@@ -45,7 +52,7 @@ public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput
     @Override
     public ItemStack assemble(ArtisanRecipeInput input, HolderLookup.Provider registries)
     {
-        return this.result.copy();
+        return this.result.getFirst().stack();
     }
 
     @Override
@@ -70,6 +77,11 @@ public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput
     @Override
     public ItemStack getResultItem(HolderLookup.Provider registries)
     {
+        return this.result.getFirst().stack();
+    }
+
+    public List<ChancedStack> getResult()
+    {
         return this.result;
     }
 
@@ -81,7 +93,6 @@ public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput
 
     public interface Factory<T extends AbstractArtisanRecipe>
     {
-        T create(List<Ingredient> ingredients, ItemStack result, int processing_hours);
+        T create(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours);
     }
-
 }

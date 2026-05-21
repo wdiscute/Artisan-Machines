@@ -1,6 +1,7 @@
 package com.wdiscute.artisan.recipe;
 
 import com.wdiscute.artisan.Artisan;
+import com.wdiscute.artisan.ChancedStack;
 import com.wdiscute.artisan.registry.ArtisanBlocks;
 import com.wdiscute.artisan.registry.ArtisanRecipeSerializers;
 import com.wdiscute.artisan.registry.ArtisanRecipeTypes;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class LoomRecipe extends AbstractArtisanRecipe
 {
-    public LoomRecipe(List<Ingredient> ingredients, ItemStack result, int processing_days)
+    public LoomRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_days)
     {
         super(ArtisanRecipeTypes.LOOM.get(), ingredients, result, processing_days);
     }

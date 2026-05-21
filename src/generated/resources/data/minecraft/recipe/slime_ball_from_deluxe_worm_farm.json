@@ -1,13 +1,18 @@
 {
   "type": "artisan_machines:deluxe_worm_farm",
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:slime_ball"
+      }
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:dirt"
     }
   ],
-  "processing_hours": 8,
-  "result": {
-    "count": 1,
-    "id": "minecraft:slime_ball"
-  }
+  "processing_hours": 8
 }

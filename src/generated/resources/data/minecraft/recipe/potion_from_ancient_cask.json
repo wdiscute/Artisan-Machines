@@ -1,18 +1,23 @@
 {
   "type": "artisan_machines:ancient_cask",
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "components": {
+          "minecraft:potion_contents": {
+            "potion": "minecraft:water"
+          }
+        },
+        "count": 1,
+        "id": "minecraft:potion"
+      }
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:big_dripleaf"
     }
   ],
-  "processing_hours": 8,
-  "result": {
-    "components": {
-      "minecraft:potion_contents": {
-        "potion": "minecraft:water"
-      }
-    },
-    "count": 1,
-    "id": "minecraft:potion"
-  }
+  "processing_hours": 8
 }

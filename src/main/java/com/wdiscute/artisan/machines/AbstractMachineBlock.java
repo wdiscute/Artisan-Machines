@@ -2,11 +2,16 @@ package com.wdiscute.artisan.machines;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
+import com.wdiscute.artisan.registry.ArtisanDataMaps;
+import com.wdiscute.artisan.upgrades.MachineUpgrade;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -19,22 +24,24 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.LecternBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDailyBlock extends BaseEntityBlock
+public abstract class AbstractMachineBlock extends BaseEntityBlock
 {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<State> STATE = EnumProperty.create("state", State.class);
 
-    public AbstractDailyBlock(Properties properties)
+    public AbstractMachineBlock(Properties properties)
     {
         super(properties
                 .noOcclusion()
@@ -56,16 +63,30 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
         //idle
         if (blockState.getValue(STATE).equals(State.IDLE))
         {
+
+            MachineUpgrade machineUpgrade = ArtisanDataMaps.getOrDefault(stack, ArtisanDataMaps.ARTISAN_UPGRADES, MachineUpgrade.EMPTY);
+            if (!machineUpgrade.equals(MachineUpgrade.EMPTY))
+            {
+                if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity adbe && machineUpgrade.machines().contains(adbe.getType()))
+                {
+                    adbe.putUpgrade(stack);
+                    if (!level.isClientSide)
+                        stack.shrink(1);
+                    return ItemInteractionResult.CONSUME;
+                }
+            }
+
+
             //store count as we decrease it later on
             int count = stack.getCount();
             //cycle for item count
             for (int i = 0; i < count; i++)
             {
                 //continue if one of the previous inputs made the machine start working
-                if (level.getBlockState(pos).getValue(AbstractDailyBlock.STATE).equals(State.WORKING)) continue;
+                if (level.getBlockState(pos).getValue(AbstractMachineBlock.STATE).equals(State.WORKING)) continue;
 
                 //add item to blockEntity
-                if (level.getBlockEntity(pos) instanceof AbstractDailyBlockEntity adbe)
+                if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity adbe)
                 {
                     //get all recipes using item
                     var recipesUsingItem = level.getRecipeManager().getAllRecipesFor(adbe.getRecipeType())
@@ -102,11 +123,11 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
         //working
         if (blockState.getValue(STATE).equals(State.WORKING))
         {
-            if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractDailyBlockEntity adbe)
+            if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity adbe)
             {
                 //dirty check to prevent crashes/not saving the world to lock that block into negative hours remaining
                 if (adbe.getHoursRemaining() < 0)
-                    level.setBlockAndUpdate(pos, state.setValue(AbstractDailyBlock.STATE, AbstractDailyBlock.State.IDLE));
+                    level.setBlockAndUpdate(pos, state.setValue(AbstractMachineBlock.STATE, AbstractMachineBlock.State.IDLE));
                 else
                     displayTimeRemainingClientMessage(player, adbe);
             }
@@ -117,9 +138,9 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
         //working
         if (blockState.getValue(STATE).equals(State.HARVESTABLE))
         {
-            if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractDailyBlockEntity adbe)
+            if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity adbe)
             {
-                adbe.harvest();
+                adbe.harvest(level);
             }
             return ItemInteractionResult.SUCCESS;
         }
@@ -130,11 +151,55 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
-    public void displayTimeRemainingClientMessage(Player player, AbstractDailyBlockEntity adbe)
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston)
     {
-        player.displayClientMessage(Component.translatable("block.artisan_machines.machine.currently_making")
-                .append(Component.translatable(adbe.getResultItem().getItem().getDescriptionId()))
-                .append(Component.translatable("block.artisan_machines.machine.hours", adbe.getHoursRemaining())), true);
+        if (state.is(newState.getBlock())) return;
+
+        if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity ambe)
+        {
+            //drop result
+            if (state.getValue(AbstractMachineBlock.STATE).equals(State.HARVESTABLE))
+            {
+                for (ItemStack stack : ambe.getHarvestResults())
+                {
+                    Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
+                    ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), stack);
+                    itementity.setDefaultPickUpDelay();
+                    level.addFreshEntity(itementity);
+                }
+            }
+            //drop items stored
+            else
+            {
+                for (ItemStack stack : ambe.getItems())
+                {
+                    Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
+                    ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), stack);
+                    itementity.setDefaultPickUpDelay();
+                    level.addFreshEntity(itementity);
+                }
+            }
+
+            //drop upgrades
+            for (ItemStack stack : ambe.upgrades)
+            {
+                Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
+                ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), stack);
+                itementity.setDefaultPickUpDelay();
+                level.addFreshEntity(itementity);
+            }
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    public void displayTimeRemainingClientMessage(Player player, AbstractMachineBlockEntity adbe)
+    {
+        if (!adbe.getResultItem().isEmpty())
+            player.displayClientMessage(Component.translatable("block.artisan_machines.machine.currently_making")
+                    .append(Component.translatable(adbe.getResultItem().getFirst().stack().getItem().getDescriptionId()))
+                    .append(Component.translatable("block.artisan_machines.machine.hours", adbe.getHoursRemaining())), true);
     }
 
     @Override
@@ -154,7 +219,7 @@ public abstract class AbstractDailyBlock extends BaseEntityBlock
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
-        return AbstractDailyBlockEntity.getTicker(level, state);
+        return AbstractMachineBlockEntity.getTicker(level, state);
     }
 
     public enum State implements StringRepresentable

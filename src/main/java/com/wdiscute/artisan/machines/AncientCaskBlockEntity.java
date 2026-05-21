@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class AncientCaskBlockEntity extends AbstractDailyBlockEntity
+public class AncientCaskBlockEntity extends AbstractMachineBlockEntity
 {
     public AncientCaskBlockEntity(BlockPos blockPos, BlockState blockState)
     {

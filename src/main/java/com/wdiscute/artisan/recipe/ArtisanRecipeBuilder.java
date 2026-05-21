@@ -1,5 +1,6 @@
 package com.wdiscute.artisan.recipe;
 
+import com.wdiscute.artisan.ChancedStack;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -18,17 +19,25 @@ import java.util.*;
 
 public class ArtisanRecipeBuilder implements RecipeBuilder
 {
-    private final ItemStack stackResult;
+    private final List<ChancedStack> stackResult;
     private final List<Ingredient> ingredients;
     private final int processing_time;
     private String group;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     private final AbstractArtisanRecipe.Factory<?> factory;
 
-    public ArtisanRecipeBuilder(ItemStack result, AbstractArtisanRecipe.Factory<?> factory, int processing_time, Ingredient... ingredients)
+    public ArtisanRecipeBuilder(List<ChancedStack> result, AbstractArtisanRecipe.Factory<?> factory, int processing_time, Ingredient... ingredients)
     {
         this.ingredients = Arrays.stream(ingredients).toList();
         this.stackResult = result;
+        this.processing_time = processing_time;
+        this.factory = factory;
+    }
+
+    public ArtisanRecipeBuilder(ItemStack result, AbstractArtisanRecipe.Factory<?> factory, int processing_time, Ingredient... ingredients)
+    {
+        this.ingredients = Arrays.stream(ingredients).toList();
+        this.stackResult = List.of(new ChancedStack(result, 1));
         this.processing_time = processing_time;
         this.factory = factory;
     }
@@ -48,14 +57,14 @@ public class ArtisanRecipeBuilder implements RecipeBuilder
     @Override
     public Item getResult()
     {
-        return this.stackResult.getItem();
+        return this.stackResult.getFirst().stack().getItem();
     }
 
     @Override
     public void save(RecipeOutput recipeOutput)
     {
         save(recipeOutput, ResourceLocation.withDefaultNamespace(
-                BuiltInRegistries.ITEM.getKey(stackResult.getItem()).getPath()
+                BuiltInRegistries.ITEM.getKey(stackResult.getFirst().stack().getItem()).getPath()
                         + "_from_" + group));
     }
 

@@ -1,13 +1,18 @@
 {
   "type": "artisan_machines:mayonnaise_machine",
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:white_banner"
+      }
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:egg"
     }
   ],
-  "processing_hours": 2,
-  "result": {
-    "count": 1,
-    "id": "minecraft:white_banner"
-  }
+  "processing_hours": 2
 }

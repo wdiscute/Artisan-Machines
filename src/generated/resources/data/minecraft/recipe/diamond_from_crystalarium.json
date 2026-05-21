@@ -1,13 +1,18 @@
 {
   "type": "artisan_machines:crystalarium",
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:diamond"
+      }
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:coal"
     }
   ],
-  "processing_hours": 8,
-  "result": {
-    "count": 1,
-    "id": "minecraft:diamond"
-  }
+  "processing_hours": 8
 }

@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class PreservesJarBlockEntity extends AbstractDailyBlockEntity
+public class PreservesJarBlockEntity extends AbstractMachineBlockEntity
 {
     public PreservesJarBlockEntity(BlockPos blockPos, BlockState blockState)
     {

@@ -1,5 +1,14 @@
 {
   "type": "artisan_machines:loom",
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:diamond"
+      }
+    }
+  ],
   "ingredients": [
     {
       "tag": "minecraft:wool"
@@ -11,9 +20,5 @@
       "tag": "minecraft:wool"
     }
   ],
-  "processing_hours": 24,
-  "result": {
-    "count": 1,
-    "id": "minecraft:diamond"
-  }
+  "processing_hours": 24
 }

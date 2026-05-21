@@ -1,18 +1,23 @@
 {
   "type": "artisan_machines:wine_keg",
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "components": {
+          "minecraft:potion_contents": {
+            "potion": "minecraft:water"
+          }
+        },
+        "count": 1,
+        "id": "minecraft:potion"
+      }
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:sweet_berries"
     }
   ],
-  "processing_hours": 8,
-  "result": {
-    "components": {
-      "minecraft:potion_contents": {
-        "potion": "minecraft:water"
-      }
-    },
-    "count": 1,
-    "id": "minecraft:potion"
-  }
+  "processing_hours": 8
 }

@@ -1,5 +1,6 @@
 package com.wdiscute.artisan.recipe;
 
+import com.wdiscute.artisan.ChancedStack;
 import com.wdiscute.artisan.registry.ArtisanBlocks;
 import com.wdiscute.artisan.registry.ArtisanRecipeSerializers;
 import com.wdiscute.artisan.registry.ArtisanRecipeTypes;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class CrystalariumRecipe extends AbstractArtisanRecipe
 {
-    public CrystalariumRecipe(List<Ingredient> ingredients, ItemStack result, int processing_hours)
+    public CrystalariumRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours)
     {
         super(ArtisanRecipeTypes.CRYSTALARIUM.get(), ingredients, result, processing_hours);
     }

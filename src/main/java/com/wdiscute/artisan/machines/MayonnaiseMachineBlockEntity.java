@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class MayonnaiseMachineBlockEntity extends AbstractDailyBlockEntity
+public class MayonnaiseMachineBlockEntity extends AbstractMachineBlockEntity
 {
     public MayonnaiseMachineBlockEntity(BlockPos blockPos, BlockState blockState)
     {

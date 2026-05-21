@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class RecyclingMachineBlockEntity extends AbstractDailyBlockEntity
+public class RecyclingMachineBlockEntity extends AbstractMachineBlockEntity
 {
     public RecyclingMachineBlockEntity(BlockPos blockPos, BlockState blockState)
     {

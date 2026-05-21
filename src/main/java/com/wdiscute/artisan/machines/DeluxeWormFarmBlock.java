@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class DeluxeWormFarmBlock extends AbstractDailyBlock
+public class DeluxeWormFarmBlock extends AbstractMachineBlock
 {
     public DeluxeWormFarmBlock()
     {

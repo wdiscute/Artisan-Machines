@@ -1,5 +1,6 @@
 package com.wdiscute.artisan.recipe;
 
+import com.wdiscute.artisan.ChancedStack;
 import com.wdiscute.artisan.registry.ArtisanBlocks;
 import com.wdiscute.artisan.registry.ArtisanRecipeSerializers;
 import com.wdiscute.artisan.registry.ArtisanRecipeTypes;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class SeedMakerRecipe extends AbstractArtisanRecipe
 {
-    public SeedMakerRecipe(List<Ingredient> ingredients, ItemStack result, int processing_hours)
+    public SeedMakerRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours)
     {
         super(ArtisanRecipeTypes.SEED_MAKER.get(), ingredients, result, processing_hours);
     }

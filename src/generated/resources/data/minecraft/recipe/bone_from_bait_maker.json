@@ -1,13 +1,18 @@
 {
   "type": "artisan_machines:bait_maker",
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:bone"
+      }
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:salmon"
     }
   ],
-  "processing_hours": 2,
-  "result": {
-    "count": 1,
-    "id": "minecraft:bone"
-  }
+  "processing_hours": 2
 }

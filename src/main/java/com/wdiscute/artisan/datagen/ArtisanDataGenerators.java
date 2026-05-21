@@ -67,7 +67,7 @@ public class ArtisanDataGenerators
         gen.addProvider(event.includeServer(), new DGArtisanRecipeProvider(output, lookupProvider));
 
         //data maps
-        //gen.addProvider(event.includeServer(), new DGSCDataMapsProvider(output, lookupProvider));
+        gen.addProvider(event.includeServer(), new DGArtisanDataMapsProvider(output, lookupProvider));
 
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CheesePressBlockEntity extends AbstractDailyBlockEntity
+public class CheesePressBlockEntity extends AbstractMachineBlockEntity
 {
     public CheesePressBlockEntity(BlockPos blockPos, BlockState blockState)
     {
