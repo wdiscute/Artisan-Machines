@@ -7,6 +7,12 @@ plugins {
 
 repositories
         {
+            //emi
+            maven {
+                name = "TerraformersMC"
+                url = "https://maven.terraformersmc.com/"
+            }
+
             //modrinth
             maven {
                 url = "https://api.modrinth.com/maven"
@@ -21,7 +27,9 @@ dependencies {
     compileOnly("maven.modrinth:quality-food:vLFBpk1n")
     runtimeOnly("maven.modrinth:quality-food:vLFBpk1n")
 
-
+    //EMI
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 }
 
 publishing {

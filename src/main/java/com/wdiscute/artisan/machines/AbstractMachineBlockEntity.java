@@ -123,7 +123,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity
 
     public void checkForRecipe()
     {
-        ArtisanRecipeInput input = new ArtisanRecipeInput(items);
+        ArtisanRecipeInput input = new ArtisanRecipeInput(items, getUpgrades());
 
         var recipeFor = level.getRecipeManager().getRecipeFor(getRecipeType(), input, level);
         if (recipeFor.isPresent())
@@ -134,7 +134,9 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity
             //+1 as a recipe put 1 second before daily reset shouldn't be finished
             hoursRemaining = recipe.getHours() + 1;
             lastTickHour = -1;
+            getUpgrades().forEach(o -> o.onRecipeStarted(recipe, this));
         }
+
         setChanged();
     }
 

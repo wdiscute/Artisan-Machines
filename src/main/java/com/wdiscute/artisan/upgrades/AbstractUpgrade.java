@@ -4,11 +4,14 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.artisan.Artisan;
 import com.wdiscute.artisan.machines.AbstractMachineBlockEntity;
+import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class AbstractUpgrade
 {
@@ -19,6 +22,11 @@ public abstract class AbstractUpgrade
     public abstract MapCodec<? extends AbstractUpgrade> codec();
 
     public abstract DeferredHolder<AbstractUpgrade, ? extends AbstractUpgrade> getRegistryHolder();
+
+    public ResourceLocation getUpgradeId()
+    {
+        return getRegistryHolder().getId();
+    }
 
     public DeferredHolder<AbstractUpgrade, ? extends AbstractUpgrade> getRegistryHolderOrThrow()
     {
@@ -60,6 +68,11 @@ public abstract class AbstractUpgrade
     }
 
     public void onAdd(AbstractMachineBlockEntity abstractMachineBlockEntity)
+    {
+
+    }
+
+    public void onRecipeStarted(AbstractArtisanRecipe recipe, AbstractMachineBlockEntity machine)
     {
 
     }

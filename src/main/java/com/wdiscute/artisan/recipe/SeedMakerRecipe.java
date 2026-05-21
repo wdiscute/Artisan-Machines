@@ -4,6 +4,7 @@ import com.wdiscute.artisan.ChancedStack;
 import com.wdiscute.artisan.registry.ArtisanBlocks;
 import com.wdiscute.artisan.registry.ArtisanRecipeSerializers;
 import com.wdiscute.artisan.registry.ArtisanRecipeTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -12,9 +13,9 @@ import java.util.List;
 
 public class SeedMakerRecipe extends AbstractArtisanRecipe
 {
-    public SeedMakerRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours)
+    public SeedMakerRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
     {
-        super(ArtisanRecipeTypes.SEED_MAKER.get(), ingredients, result, processing_hours);
+        super(ArtisanRecipeTypes.SEED_MAKER.get(), ingredients, result, processing_hours, requiredUpgrades);
     }
 
     @Override

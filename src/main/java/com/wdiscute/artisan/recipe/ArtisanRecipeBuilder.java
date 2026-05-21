@@ -22,9 +22,19 @@ public class ArtisanRecipeBuilder implements RecipeBuilder
     private final List<ChancedStack> stackResult;
     private final List<Ingredient> ingredients;
     private final int processing_time;
+    private final List<ResourceLocation> requiredUpgrades;
     private String group;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     private final AbstractArtisanRecipe.Factory<?> factory;
+
+    public ArtisanRecipeBuilder(List<ChancedStack> result, AbstractArtisanRecipe.Factory<?> factory, int processing_time, List<ResourceLocation> requiredUpgrades, Ingredient... ingredients)
+    {
+        this.ingredients = Arrays.stream(ingredients).toList();
+        this.stackResult = result;
+        this.processing_time = processing_time;
+        this.factory = factory;
+        this.requiredUpgrades = requiredUpgrades;
+    }
 
     public ArtisanRecipeBuilder(List<ChancedStack> result, AbstractArtisanRecipe.Factory<?> factory, int processing_time, Ingredient... ingredients)
     {
@@ -32,6 +42,16 @@ public class ArtisanRecipeBuilder implements RecipeBuilder
         this.stackResult = result;
         this.processing_time = processing_time;
         this.factory = factory;
+        this.requiredUpgrades = List.of();
+    }
+
+    public ArtisanRecipeBuilder(ItemStack result, AbstractArtisanRecipe.Factory<?> factory, int processing_time, List<ResourceLocation> requiredUpgrades, Ingredient... ingredients)
+    {
+        this.ingredients = Arrays.stream(ingredients).toList();
+        this.stackResult = List.of(new ChancedStack(result, 1));
+        this.processing_time = processing_time;
+        this.factory = factory;
+        this.requiredUpgrades = requiredUpgrades;
     }
 
     public ArtisanRecipeBuilder(ItemStack result, AbstractArtisanRecipe.Factory<?> factory, int processing_time, Ingredient... ingredients)
@@ -40,6 +60,7 @@ public class ArtisanRecipeBuilder implements RecipeBuilder
         this.stackResult = List.of(new ChancedStack(result, 1));
         this.processing_time = processing_time;
         this.factory = factory;
+        this.requiredUpgrades = List.of();
     }
 
     public ArtisanRecipeBuilder unlockedBy(String name, Criterion<?> criterion)
@@ -81,7 +102,7 @@ public class ArtisanRecipeBuilder implements RecipeBuilder
         this.criteria.forEach(advancement$builder::addCriterion);
 
         AbstractArtisanRecipe abstractArtisanRecipe = this.factory
-                .create(this.ingredients, this.stackResult, this.processing_time);
+                .create(this.ingredients, this.stackResult, this.processing_time, this.requiredUpgrades);
 
         recipeOutput.accept(id, abstractArtisanRecipe, advancement$builder
                 .build(id.withPrefix("recipes/")));

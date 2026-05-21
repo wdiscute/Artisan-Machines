@@ -7,6 +7,7 @@ import com.wdiscute.artisan.ChancedStack;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 
@@ -21,7 +22,8 @@ public class ArtisanSerializer<T extends AbstractArtisanRecipe> implements Recip
                 instance -> instance.group(
                                 Ingredient.LIST_CODEC.fieldOf("ingredients").forGetter(recipe -> recipe.ingredients),
                                 ChancedStack.CODEC.listOf().fieldOf("chanced_results").forGetter(recipe -> recipe.result),
-                                Codec.INT.fieldOf("processing_hours").forGetter(recipe -> recipe.processing_hours)
+                                Codec.INT.fieldOf("processing_hours").forGetter(recipe -> recipe.processing_hours),
+                                ResourceLocation.CODEC.listOf().fieldOf("required_upgrades").forGetter(recipe -> recipe.requiresUpgrade)
                         )
                         .apply(instance, factory::create)
         );
@@ -30,6 +32,7 @@ public class ArtisanSerializer<T extends AbstractArtisanRecipe> implements Recip
                 Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.ingredients,
                 ChancedStack.LIST_STREAM_CODEC, o -> o.result,
                 ByteBufCodecs.INT, o -> o.processing_hours,
+                ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.requiresUpgrade,
                 factory::create
         );
     }

@@ -31,6 +31,12 @@ public class PreserveQualityUpgrade extends AbstractUpgrade
                     RegistryCodecs.homogeneousList(Registries.ITEM).fieldOf("excluded_outputs").forGetter(o -> o.excludedOutputs)
             ).apply(instance, PreserveQualityUpgrade::new));
 
+    public PreserveQualityUpgrade()
+    {
+        excludedInputs = HolderSet.empty();
+        excludedOutputs = HolderSet.empty();
+    }
+
     public PreserveQualityUpgrade(HolderSet<Item> inputs, HolderSet<Item> outputs)
     {
         this.excludedInputs = inputs;
@@ -63,6 +69,6 @@ public class PreserveQualityUpgrade extends AbstractUpgrade
     @Override
     public DeferredHolder<AbstractUpgrade, ? extends AbstractUpgrade> getRegistryHolder()
     {
-        return ArtisanUpgrades.INFINITE_CRAFT;
+        return ArtisanUpgrades.PRESERVE_QUALITY;
     }
 }

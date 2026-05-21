@@ -1,5 +1,39 @@
 {
   "values": {
+    "artisan_machines:pink_matter": {
+      "machines": [
+        "artisan_machines:loom"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:transmute_result",
+          "transmutations": [
+            {
+              "original": "minecraft:gold_ingot",
+              "transmuted": {
+                "count": 1,
+                "id": "minecraft:diamond"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "artisan_machines:tiny_gnome": {
+      "machines": [
+        "artisan_machines:loom"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:add_random_to_result",
+          "chance": 0.25,
+          "stacks": [],
+          "tags": [
+            "minecraft:logs"
+          ]
+        }
+      ]
+    },
     "minecraft:trial_key": {
       "machines": [
         "artisan_machines:deluxe_worm_farm"

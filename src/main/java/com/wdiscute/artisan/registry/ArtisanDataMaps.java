@@ -5,7 +5,9 @@ import com.wdiscute.artisan.machines.AbstractMachineBlockEntity;
 import com.wdiscute.artisan.upgrades.AbstractUpgrade;
 import com.wdiscute.artisan.upgrades.MachineSettings;
 import com.wdiscute.artisan.upgrades.MachineUpgrade;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -23,7 +25,7 @@ public interface ArtisanDataMaps
     ).synced(MachineUpgrade.CODEC, true).build();
 
     DataMapType<BlockEntityType<?>, MachineSettings> MACHINE_SETTINGS = DataMapType.builder(
-            Artisan.rl("artisan_upgrades"), Registries.BLOCK_ENTITY_TYPE, MachineSettings.CODEC
+            Artisan.rl("machine_settings"), Registries.BLOCK_ENTITY_TYPE, MachineSettings.CODEC
     ).synced(MachineSettings.CODEC, true).build();
 
     static MachineUpgrade getOrDefault(ItemStack stack)

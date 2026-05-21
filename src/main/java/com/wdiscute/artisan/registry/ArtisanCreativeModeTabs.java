@@ -27,7 +27,7 @@ public interface ArtisanCreativeModeTabs
 
     static void addItems()
     {
-        //Must Have
+        //Machines
         FancyTabSections.addSection(Artisan.rl("artisan_machines"),
                 new SectionColored(
                         Artisan.rl("machines"),
@@ -36,6 +36,18 @@ public interface ArtisanCreativeModeTabs
                         0xffffffff,
                         ConglomerateOfItems.create()
                                 .add(ArtisanItems.ITEMS)
+                )
+        );
+
+        //Upgrades
+        FancyTabSections.addSection(Artisan.rl("artisan_machines"),
+                new SectionColored(
+                        Artisan.rl("upgrades"),
+                        Component.translatable("creativetab.artisan_machines.artisan_machines.upgrades"),
+                        0xff344545,
+                        0xffffffff,
+                        ConglomerateOfItems.create()
+                                .add(ArtisanItems.UPGRADES)
                 )
         );
 

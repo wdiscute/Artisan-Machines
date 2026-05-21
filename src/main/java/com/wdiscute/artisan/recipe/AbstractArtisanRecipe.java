@@ -1,43 +1,53 @@
 package com.wdiscute.artisan.recipe;
 
 import com.wdiscute.artisan.ChancedStack;
+import com.wdiscute.artisan.upgrades.AbstractUpgrade;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput>
 {
     RecipeType<?> type;
     List<Ingredient> ingredients;
+    List<ResourceLocation> requiresUpgrade;
     List<ChancedStack> result;
     int processing_hours;
 
-    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours)
+    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
     {
         this.type = type;
         this.ingredients = ingredients;
         this.result = result;
         this.processing_hours = processing_hours;
+        this.requiresUpgrade = requiredUpgrades;
     }
 
-    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, ItemStack result, int processing_hours)
+    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, ItemStack result, int processing_hours, List<ResourceLocation> requiredUpgrades)
     {
         this.type = type;
         this.ingredients = ingredients;
         this.result = List.of(new ChancedStack(result, 1));
         this.processing_hours = processing_hours;
+        this.requiresUpgrade = requiredUpgrades;
     }
 
     @Override
     public boolean matches(ArtisanRecipeInput input, Level level)
     {
         List<Ingredient> ingLeftToCheck = new ArrayList<>(ingredients);
+
+        //if input doesn't contain all required upgrades, return false
+        boolean containsAll = new HashSet<>(input.requiredUpgrades.stream().map(AbstractUpgrade::getUpgradeId).toList()).containsAll(requiresUpgrade);
+        if(!containsAll) return false;
 
         for (ItemStack item : input.items)
         {
@@ -93,6 +103,6 @@ public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput
 
     public interface Factory<T extends AbstractArtisanRecipe>
     {
-        T create(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours);
+        T create(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades);
     }
 }

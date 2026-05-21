@@ -1,6 +1,7 @@
 {
   "creativetab.artisan_machines.artisan_machines": "Artisan Machines",
   "creativetab.artisan_machines.artisan_machines.machines": "Machines",
+  "creativetab.artisan_machines.artisan_machines.upgrades": "Upgrades",
 
   "block.artisan_machines.machine.currently_making": "Currently Making: ",
   "block.artisan_machines.machine.hours": " - %s hours left",
@@ -19,5 +20,22 @@
   "block.artisan_machines.seed_maker": "Seed Maker",
   "block.artisan_machines.recycling_machine": "Recycling Machine",
   "block.artisan_machines.bait_maker": "Bait Maker",
-  "block.artisan_machines.oil_maker": "Oil Maker"
+  "block.artisan_machines.oil_maker": "Oil Maker",
+
+  "item.artisan_machines.stone_hand" : "Stone Hand",
+  "item.artisan_machines.tiny_gnome" : "Tiny Gnome",
+  "item.artisan_machines.pink_matter" : "Pink Matter",
+  "item.artisan_machines.ancient_cog" : "Ancient Cog",
+  "item.artisan_machines.broken_clock" : "Broken Clock",
+  "item.artisan_machines.black_opal" : "Black Opal",
+  "item.artisan_machines.ancient_roe" : "Ancient Roe",
+  "item.artisan_machines.infinity_roe" : "Infinity Roe",
+  "item.artisan_machines.frosted_tip" : "Frosted Tip",
+  "item.artisan_machines.inserter" : "Inserter",
+  "item.artisan_machines.cordycep" : "Cordycep",
+  "item.artisan_machines.enkephalin" : "Enkephalin",
+  "item.artisan_machines.gray_anatomy" : "Gray Anatomy",
+  "item.artisan_machines.recycled_core" : "Recycled Core"
+
+
 }
