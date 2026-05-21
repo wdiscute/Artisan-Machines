@@ -4,10 +4,13 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.artisan.ChancedStack;
+import com.wdiscute.artisan.machines.AbstractMachineBlock;
 import com.wdiscute.artisan.machines.AbstractMachineBlockEntity;
 import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
 import com.wdiscute.artisan.registry.ArtisanUpgrades;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
@@ -36,11 +39,30 @@ public class InfiniteCraftUpgrade extends AbstractUpgrade
     }
 
     @Override
+    public void onAdd(AbstractMachineBlockEntity machine)
+    {
+        super.onAdd(machine);
+        //set "recipe"
+        machine.hoursRemaining = hours;
+        machine.recipeResult = result;
+        //update blockstate to working
+        Level level = machine.getLevel();
+        BlockState blockState = level.getBlockState(machine.getBlockPos());
+        level.setBlockAndUpdate(machine.getBlockPos(),
+                blockState.setValue(AbstractMachineBlock.STATE, AbstractMachineBlock.State.WORKING));
+    }
+
+    @Override
     public void onFinishedHarvest(AbstractMachineBlockEntity machine)
     {
         super.onFinishedHarvest(machine);
         machine.hoursRemaining = hours;
         machine.recipeResult = result;
+        //update blockstate to working
+        Level level = machine.getLevel();
+        BlockState blockState = level.getBlockState(machine.getBlockPos());
+        level.setBlockAndUpdate(machine.getBlockPos(),
+                blockState.setValue(AbstractMachineBlock.STATE, AbstractMachineBlock.State.WORKING));
     }
 
     @Override

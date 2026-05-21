@@ -62,16 +62,17 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity
         setChanged();
     }
 
-    public void putUpgrade(ItemStack itemStack)
+    public void putUpgrade(ItemStack itemStack, MachineUpgrade machineUpgrade)
     {
         upgrades.add(itemStack.copyWithCount(1));
+        machineUpgrade.upgrades().forEach(o -> o.onAdd(this));
         setChanged();
     }
 
     public List<AbstractUpgrade> getUpgrades()
     {
         //gets every upgrade from the items stored using the datamap
-        List<List<AbstractUpgrade>> list = upgrades.stream().map(o -> ArtisanDataMaps.getOrDefault(o, ArtisanDataMaps.ARTISAN_UPGRADES, MachineUpgrade.EMPTY).upgrades()).toList();
+        List<List<AbstractUpgrade>> list = upgrades.stream().map(o -> ArtisanDataMaps.getOrDefault(o).upgrades()).toList();
         List<AbstractUpgrade> upgrades = new ArrayList<>();
         list.forEach(upgrades::addAll);
         return upgrades;

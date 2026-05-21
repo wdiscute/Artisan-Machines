@@ -19,5 +19,6 @@ public class ArtisanEvents
     public static void addDataMap(RegisterDataMapTypesEvent event)
     {
         event.register(ArtisanDataMaps.ARTISAN_UPGRADES);
+        event.register(ArtisanDataMaps.MACHINE_SETTINGS);
     }
 }

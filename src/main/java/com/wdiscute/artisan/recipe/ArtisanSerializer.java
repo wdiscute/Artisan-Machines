@@ -19,7 +19,7 @@ public class ArtisanSerializer<T extends AbstractArtisanRecipe> implements Recip
     {
         this.codec = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
-                                Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.ingredients),
+                                Ingredient.LIST_CODEC.fieldOf("ingredients").forGetter(recipe -> recipe.ingredients),
                                 ChancedStack.CODEC.listOf().fieldOf("chanced_results").forGetter(recipe -> recipe.result),
                                 Codec.INT.fieldOf("processing_hours").forGetter(recipe -> recipe.processing_hours)
                         )

@@ -58,4 +58,9 @@ public abstract class AbstractUpgrade
     {
         return results;
     }
+
+    public void onAdd(AbstractMachineBlockEntity abstractMachineBlockEntity)
+    {
+
+    }
 }

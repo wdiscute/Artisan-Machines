@@ -3,9 +3,11 @@ package com.wdiscute.artisan.machines;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
 import com.wdiscute.artisan.registry.ArtisanDataMaps;
+import com.wdiscute.artisan.upgrades.MachineSettings;
 import com.wdiscute.artisan.upgrades.MachineUpgrade;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
@@ -14,6 +16,8 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -60,19 +64,31 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock
         ItemInteractionResult result = null;
         BlockState blockState = level.getBlockState(pos);
 
-        //idle
+        //idle state interaction logic
         if (blockState.getValue(STATE).equals(State.IDLE))
         {
-
-            MachineUpgrade machineUpgrade = ArtisanDataMaps.getOrDefault(stack, ArtisanDataMaps.ARTISAN_UPGRADES, MachineUpgrade.EMPTY);
+            //"place upgrade" checks ⏬
+            //if the item has a machine upgrade
+            MachineUpgrade machineUpgrade = ArtisanDataMaps.getOrDefault(stack);
             if (!machineUpgrade.equals(MachineUpgrade.EMPTY))
             {
+                //if the machine upgrade accepts this machine type
                 if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity adbe && machineUpgrade.machines().contains(adbe.getType()))
                 {
-                    adbe.putUpgrade(stack);
-                    if (!level.isClientSide)
-                        stack.shrink(1);
-                    return ItemInteractionResult.CONSUME;
+                    //if machine can use repeated upgrades, OR none of the upgrade items already inside match the item attempting to be put in
+                    MachineSettings machineSettings = ArtisanDataMaps.getOrDefault(adbe);
+                    if (machineSettings.canUseRepeatedUpgrades() || adbe.upgrades.stream().noneMatch(o -> o.is(stack.getItem())))
+                    {
+                        //if there is space for another upgrade
+                        if (machineSettings.upgradeSlots() > adbe.upgrades.size())
+                        {
+                            //put upgrade
+                            if (!level.isClientSide)
+                                adbe.putUpgrade(stack, machineUpgrade);
+                            stack.shrink(1);
+                            return ItemInteractionResult.CONSUME;
+                        }
+                    }
                 }
             }
 
@@ -120,7 +136,7 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock
             }
         }
 
-        //working
+        //working state interaction logic
         if (blockState.getValue(STATE).equals(State.WORKING))
         {
             if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity adbe)
@@ -135,11 +151,12 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock
             return ItemInteractionResult.SUCCESS;
         }
 
-        //working
+        //harvestable state interaction logic
         if (blockState.getValue(STATE).equals(State.HARVESTABLE))
         {
             if (!level.isClientSide && level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity adbe)
             {
+                //all harvesting logic is done on block entity
                 adbe.harvest(level);
             }
             return ItemInteractionResult.SUCCESS;
@@ -154,11 +171,12 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston)
     {
+        //prevents running on setBlock() etc
         if (state.is(newState.getBlock())) return;
 
         if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity ambe)
         {
-            //drop result
+            //drop result if harvestable
             if (state.getValue(AbstractMachineBlock.STATE).equals(State.HARVESTABLE))
             {
                 for (ItemStack stack : ambe.getHarvestResults())
@@ -169,7 +187,7 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock
                     level.addFreshEntity(itementity);
                 }
             }
-            //drop items stored
+            //drop items stored if working/idle
             else
             {
                 for (ItemStack stack : ambe.getItems())
@@ -181,7 +199,7 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock
                 }
             }
 
-            //drop upgrades
+            //drop upgrades regardless
             for (ItemStack stack : ambe.upgrades)
             {
                 Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
@@ -200,6 +218,12 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock
             player.displayClientMessage(Component.translatable("block.artisan_machines.machine.currently_making")
                     .append(Component.translatable(adbe.getResultItem().getFirst().stack().getItem().getDescriptionId()))
                     .append(Component.translatable("block.artisan_machines.machine.hours", adbe.getHoursRemaining())), true);
+    }
+
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context)
+    {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override

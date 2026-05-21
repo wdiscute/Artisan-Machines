@@ -16,6 +16,12 @@ repositories
 dependencies {
     //fancy tab sections
     jarJar(implementation("maven.modrinth:fancytabsections:2.0-NEOFORGE-1.21.1"))
+
+    //quality foods compat
+    compileOnly("maven.modrinth:quality-food:vLFBpk1n")
+    runtimeOnly("maven.modrinth:quality-food:vLFBpk1n")
+
+
 }
 
 publishing {
