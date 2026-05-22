@@ -19,9 +19,7 @@ public interface ArtisanItems
     DeferredItem<Item> BROKEN_CLOCK = register("broken_clock");
     DeferredItem<Item> BLACK_OPAL = register("black_opal");
     DeferredItem<Item> ANCIENT_ROE = register("ancient_roe");
-    DeferredItem<Item> INFINITY_ROE = register("infinity_roe");
     DeferredItem<Item> INFINITY_WORM = register("infinity_worm");
-    DeferredItem<Item> FROSTED_TIP = register("frosted_tip");
     DeferredItem<Item> INSERTER = register("inserter");
     DeferredItem<Item> CORDYCEP = register("cordycep");
     DeferredItem<Item> ENKEPHALIN = register("enkephalin");
