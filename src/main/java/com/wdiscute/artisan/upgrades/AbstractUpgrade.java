@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,11 +23,6 @@ public abstract class AbstractUpgrade
     public abstract MapCodec<? extends AbstractUpgrade> codec();
 
     public abstract DeferredHolder<AbstractUpgrade, ? extends AbstractUpgrade> getRegistryHolder();
-
-    public ResourceLocation getUpgradeId()
-    {
-        return getRegistryHolder().getId();
-    }
 
     public DeferredHolder<AbstractUpgrade, ? extends AbstractUpgrade> getRegistryHolderOrThrow()
     {
@@ -53,13 +49,22 @@ public abstract class AbstractUpgrade
     {
     }
 
+    /**
+     * ticks hourly when working, or when blockEntity overrides shouldTickNonWorking()
+     */
     public void onHourlyTick(AbstractMachineBlockEntity machine, long hour)
+    {
+    }
+
+    /**
+     * ticks with an offset based on the tick delay config - does NOT tick every tick
+     */
+    public void onTick(AbstractMachineBlockEntity machine)
     {
     }
 
     public void onFinishedHarvest(AbstractMachineBlockEntity machine)
     {
-
     }
 
     public List<ItemStack> modifyHarvestResult(AbstractMachineBlockEntity machine, List<ItemStack> results)
@@ -72,7 +77,7 @@ public abstract class AbstractUpgrade
 
     }
 
-    public void onRecipeStarted(AbstractArtisanRecipe recipe, AbstractMachineBlockEntity machine)
+    public void onRecipeStarted(@Nullable AbstractArtisanRecipe recipe, AbstractMachineBlockEntity machine)
     {
 
     }

@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"3": "artisan_machines:block/charging_rod_idle",
-		"particle": "society:block/charging_rod"
+		"particle": "artisan_machines:block/charging_rod_idle"
 	},
 	"elements": [
 		{

@@ -33,7 +33,6 @@ public class DGArtisanDataMapsProvider extends DataMapProvider
     protected void gather(HolderLookup.Provider provider)
     {
         var itemUpgrades = this.builder(ArtisanDataMaps.ARTISAN_UPGRADES);
-        var machineSettings = this.builder(ArtisanDataMaps.MACHINE_SETTINGS);
 
         //tiny gnome - looom
         itemUpgrades.add(ArtisanItems.TINY_GNOME,
@@ -159,6 +158,18 @@ public class DGArtisanDataMapsProvider extends DataMapProvider
                 ), false);
 
 
+        var machineSettings = this.builder(ArtisanDataMaps.MACHINE_SETTINGS);
+
+        ItemStack battery = Items.DIAMOND.getDefaultInstance();
+        battery.set(DataComponents.CUSTOM_NAME, Component.literal("Battery"));
+        machineSettings.add(ArtisanBlockEntities.CHARGING_ROD,
+
+                new MachineSettings(
+                        List.of(new StartRecipeUpgrade(List.of(new ChancedStack(battery, 1)), 8, 0.1f, true)),
+                        1,
+                        false
+                ),
+                false);
 
     }
 }

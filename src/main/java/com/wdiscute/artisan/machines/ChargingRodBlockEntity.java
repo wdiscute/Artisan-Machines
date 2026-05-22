@@ -15,6 +15,12 @@ public class ChargingRodBlockEntity extends AbstractMachineBlockEntity
     }
 
     @Override
+    public boolean shouldTickNonWorking()
+    {
+        return true;
+    }
+
+    @Override
     public RecipeType<? extends AbstractArtisanRecipe> getRecipeType()
     {
         return ArtisanRecipeTypes.CHARGING_ROD.get();

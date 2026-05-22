@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ProcessingTimeMultiplierUpgrade extends AbstractUpgrade
     }
 
     @Override
-    public void onRecipeStarted(AbstractArtisanRecipe recipe, AbstractMachineBlockEntity machine)
+    public void onRecipeStarted(@Nullable AbstractArtisanRecipe recipe, AbstractMachineBlockEntity machine)
     {
         super.onRecipeStarted(recipe, machine);
         machine.hoursRemaining = (int) (machine.hoursRemaining * multiplier);

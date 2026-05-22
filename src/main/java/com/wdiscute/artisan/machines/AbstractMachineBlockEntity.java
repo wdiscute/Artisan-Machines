@@ -1,5 +1,6 @@
 package com.wdiscute.artisan.machines;
 
+import com.google.errorprone.annotations.DoNotCall;
 import com.wdiscute.artisan.ArtisanConfig;
 import com.wdiscute.artisan.ChancedStack;
 import com.wdiscute.artisan.recipe.AbstractArtisanRecipe;
@@ -7,6 +8,7 @@ import com.wdiscute.artisan.recipe.ArtisanRecipeInput;
 import com.wdiscute.artisan.registry.ArtisanDataMaps;
 import com.wdiscute.artisan.upgrades.AbstractUpgrade;
 import com.wdiscute.artisan.upgrades.EmptyUpgrade;
+import com.wdiscute.artisan.upgrades.MachineSettings;
 import com.wdiscute.artisan.upgrades.MachineUpgrade;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -70,12 +72,21 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity
         setChanged();
     }
 
+    private List<AbstractUpgrade> upgradesCache;
+    private List<ItemStack> upgradeItemsCache;
     public List<AbstractUpgrade> getUpgrades()
     {
+        if(upgradesCache != null && upgradeItemsCache == upgrades) return upgradesCache;
         //gets every upgrade from the items stored using the datamap
         List<List<AbstractUpgrade>> list = upgrades.stream().map(o -> ArtisanDataMaps.getOrDefault(o).upgrades()).toList();
         List<AbstractUpgrade> upgrades = new ArrayList<>();
         list.forEach(upgrades::addAll);
+
+        MachineSettings machineSettings = ArtisanDataMaps.getOrDefault(this);
+        upgrades.addAll(machineSettings.baseUpgrades());
+
+        upgradeItemsCache = List.copyOf(this.upgrades);
+        upgradesCache = upgrades;
         return upgrades;
     }
 
@@ -158,11 +169,11 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity
      */
     public void tick()
     {
-        System.out.println("tick");
+        getUpgrades().forEach(o -> o.onTick(this));
     }
 
     /**
-     * ticks daily, adds one to last tick hour so if the machine was unloaded all days are ticked
+     * ticks hourly, adds one to last tick hour so if the machine was unloaded all days are ticked
      */
     public void hourlyTick(long hour, BlockState state)
     {
@@ -317,7 +328,16 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity
             if (state.getValue(AbstractMachineBlock.STATE).equals(AbstractMachineBlock.State.WORKING) || adbe.shouldTickNonWorking())
             {
                 //tick with offset
-                if (level.getGameTime() + adbe.getTickOffset(level) % ArtisanConfig.TICK_DELAY.get() == 0) adbe.tick();
+
+                System.out.println("gametime - " + level.getGameTime());
+                System.out.println("getTickOffset - " + adbe.getTickOffset(level));
+                System.out.println("ArtisanConfig.TICK_DELAY.get() - " + ArtisanConfig.TICK_DELAY.get());
+
+                System.out.println("mod - " + ((level.getGameTime() + adbe.getTickOffset(level)) % ArtisanConfig.TICK_DELAY.get()));
+
+
+                if ((level.getGameTime() + adbe.getTickOffset(level)) % ArtisanConfig.TICK_DELAY.get() == 0)
+                    adbe.tick();
 
                 //daily tick
                 long hour = (level.getGameTime() + adbe.getTickOffset(level)) / 1000;

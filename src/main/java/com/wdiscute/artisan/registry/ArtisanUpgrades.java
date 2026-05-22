@@ -21,6 +21,7 @@ public interface ArtisanUpgrades
     DeferredHolder<AbstractUpgrade, AbstractUpgrade> TRANSMUTE_RESULT = register("transmute_result", TransmuteResultUpgrade::new);
     DeferredHolder<AbstractUpgrade, AbstractUpgrade> PROCESSING_TIME_MULTIPLIER = register("processing_time_multiplier", ProcessingTimeMultiplierUpgrade::new);
     DeferredHolder<AbstractUpgrade, AbstractUpgrade> DOUBLE_RESULT = register("double_result", DoubleResultUpgrade::new);
+    DeferredHolder<AbstractUpgrade, AbstractUpgrade> CHARGING_ROD = register("start_recipe", StartRecipeUpgrade::new);
 
     static DeferredHolder<AbstractUpgrade, AbstractUpgrade> register(String name, Supplier<AbstractUpgrade> supplier)
     {

@@ -3,6 +3,8 @@
   "creativetab.artisan_machines.artisan_machines.machines": "Machines",
   "creativetab.artisan_machines.artisan_machines.upgrades": "Upgrades",
 
+  "artisan_machines.configuration.tick_delay" : "Tick Delay",
+
   "block.artisan_machines.machine.currently_making": "Currently Making: ",
   "block.artisan_machines.machine.hours": " - %s hours left",
 
@@ -21,6 +23,7 @@
   "block.artisan_machines.recycling_machine": "Recycling Machine",
   "block.artisan_machines.bait_maker": "Bait Maker",
   "block.artisan_machines.oil_maker": "Oil Maker",
+  "block.artisan_machines.charging_rod": "Charging Rod",
 
   "item.artisan_machines.stone_hand" : "Stone Hand",
   "item.artisan_machines.tiny_gnome" : "Tiny Gnome",

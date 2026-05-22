@@ -1,3 +1,28 @@
 {
-  "values": {}
+  "values": {
+    "artisan_machines:charging_rod": {
+      "base_upgrades": [
+        {
+          "type": "artisan_machines:start_recipe",
+          "chance_to_start": 0.1,
+          "during_storm_only": true,
+          "processing_hours": 8,
+          "result": [
+            {
+              "chance": 1.0,
+              "stack": {
+                "components": {
+                  "minecraft:custom_name": "\"Battery\""
+                },
+                "count": 1,
+                "id": "minecraft:diamond"
+              }
+            }
+          ]
+        }
+      ],
+      "can_use_repeated_upgrades": false,
+      "upgrade_slots": 1
+    }
+  }
 }

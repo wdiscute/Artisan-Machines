@@ -17,7 +17,7 @@ public record MachineSettings
 
     public static final Codec<MachineSettings> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    AbstractUpgrade.UPGRADE_CODEC.listOf().fieldOf("upgrades").forGetter(MachineSettings::baseUpgrades),
+                    AbstractUpgrade.UPGRADE_CODEC.listOf().fieldOf("base_upgrades").forGetter(MachineSettings::baseUpgrades),
                     Codec.INT.fieldOf("upgrade_slots").forGetter(MachineSettings::upgradeSlots),
                     Codec.BOOL.fieldOf("can_use_repeated_upgrades").forGetter(MachineSettings::canUseRepeatedUpgrades)
             ).apply(instance, MachineSettings::new));

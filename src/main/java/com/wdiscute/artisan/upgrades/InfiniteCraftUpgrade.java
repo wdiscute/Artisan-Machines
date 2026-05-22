@@ -22,7 +22,7 @@ public class InfiniteCraftUpgrade extends AbstractUpgrade
 
     public static final MapCodec<InfiniteCraftUpgrade> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ChancedStack.LIST_CODEC.fieldOf("chanced_stack").forGetter(o -> o.result),
+                    ChancedStack.LIST_CODEC.fieldOf("result").forGetter(o -> o.result),
                     Codec.INT.fieldOf("processing_hours").forGetter(o -> o.hours)
             ).apply(instance, InfiniteCraftUpgrade::new));
 
@@ -50,6 +50,7 @@ public class InfiniteCraftUpgrade extends AbstractUpgrade
         BlockState blockState = level.getBlockState(machine.getBlockPos());
         level.setBlockAndUpdate(machine.getBlockPos(),
                 blockState.setValue(AbstractMachineBlock.STATE, AbstractMachineBlock.State.WORKING));
+        onRecipeStarted(null, machine);
     }
 
     @Override
@@ -63,6 +64,7 @@ public class InfiniteCraftUpgrade extends AbstractUpgrade
         BlockState blockState = level.getBlockState(machine.getBlockPos());
         level.setBlockAndUpdate(machine.getBlockPos(),
                 blockState.setValue(AbstractMachineBlock.STATE, AbstractMachineBlock.State.WORKING));
+        onRecipeStarted(null, machine);
     }
 
     @Override

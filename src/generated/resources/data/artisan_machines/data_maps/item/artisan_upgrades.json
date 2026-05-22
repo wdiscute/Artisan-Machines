@@ -95,7 +95,8 @@
       "upgrades": [
         {
           "type": "artisan_machines:infinite_craft",
-          "chanced_stack": [
+          "processing_hours": 4,
+          "result": [
             {
               "chance": 1.0,
               "stack": {
@@ -103,8 +104,7 @@
                 "id": "minecraft:slime_ball"
               }
             }
-          ],
-          "processing_hours": 4
+          ]
         }
       ]
     },
