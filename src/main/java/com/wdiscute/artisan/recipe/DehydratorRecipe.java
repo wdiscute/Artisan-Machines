@@ -13,9 +13,9 @@ import java.util.List;
 
 public class DehydratorRecipe extends AbstractArtisanRecipe
 {
-    public DehydratorRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public DehydratorRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.DEHYDRATOR.get(), ingredients, result, processing_hours, requiredUpgrades);
+        super(ArtisanRecipeTypes.DEHYDRATOR.get(), ingredients, result, processing_hours, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

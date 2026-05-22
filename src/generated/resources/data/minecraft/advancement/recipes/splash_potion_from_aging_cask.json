@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_big_dripleaf": {
+    "has_grapes": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:big_dripleaf"
+            "items": "minecraft:sweet_berries"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:potion_from_ancient_cask"
+        "recipe": "minecraft:splash_potion_from_aging_cask"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_big_dripleaf"
+      "has_grapes"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:potion_from_ancient_cask"
+      "minecraft:splash_potion_from_aging_cask"
     ]
   }
 }

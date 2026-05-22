@@ -1,11 +1,15 @@
 {
   "type": "artisan_machines:mayonnaise_machine",
+  "blacklisted_upgrades": [],
   "chanced_results": [
     {
       "chance": 1.0,
       "stack": {
+        "components": {
+          "minecraft:custom_name": "\"Mayo\""
+        },
         "count": 1,
-        "id": "minecraft:white_banner"
+        "id": "minecraft:white_carpet"
       }
     }
   ],
@@ -14,5 +18,6 @@
       "item": "minecraft:egg"
     }
   ],
-  "processing_hours": 2
+  "processing_hours": 4,
+  "required_upgrades": []
 }

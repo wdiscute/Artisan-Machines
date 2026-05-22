@@ -14,9 +14,9 @@ import java.util.List;
 
 public class LoomRecipe extends AbstractArtisanRecipe
 {
-    public LoomRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_days, List<ResourceLocation> requiredUpgrades)
+    public LoomRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_days, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.LOOM.get(), ingredients, result, processing_days, requiredUpgrades);
+        super(ArtisanRecipeTypes.LOOM.get(), ingredients, result, processing_days, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

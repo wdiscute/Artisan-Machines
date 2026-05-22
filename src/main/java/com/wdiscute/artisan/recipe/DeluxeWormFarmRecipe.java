@@ -13,9 +13,9 @@ import java.util.List;
 
 public class DeluxeWormFarmRecipe extends AbstractArtisanRecipe
 {
-    public DeluxeWormFarmRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public DeluxeWormFarmRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.DELUXE_WORM_FARM.get(), ingredients, result, processing_hours, requiredUpgrades);
+        super(ArtisanRecipeTypes.DELUXE_WORM_FARM.get(), ingredients, result, processing_hours, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

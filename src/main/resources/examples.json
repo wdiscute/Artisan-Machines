@@ -1,0 +1,100 @@
+{
+  "values": [
+    {
+      "id": "society:loom",
+      days: 1,
+      input: 5,
+      upgrade: "society:tiny_gnome"
+    },
+    {
+      id: "society:cheese_press",
+      days: 1-2,
+      input: 1,
+      preserve_quality: true,
+      // (unless upgraded)
+      upgrade: "society:pink_matter"
+    },
+    {
+      id: "society:wine_keg",
+      days: 6,
+      input: 3,
+      upgrade: "society:gray_anatomy"
+    },
+    {
+      id: "society:aging_cask",
+      days: 5-10,
+      input: 1,
+      upgrade: "society:broken_clock"
+    },
+    {
+      id: "society:ancient_cask",
+      days: 10-20,
+      input: 1,
+      upgrade: "society:inserter"
+    },
+    {
+      id: "society:crystalarium",
+      days: 5,
+      input: 1,
+      upgrade: "society:black_opal"
+    },
+    {
+      id: "society:deluxe_worm_farm",
+      days: 2,
+      input: 4,
+      upgrade: "society:infinity_worm"
+    },
+    {
+      id: "society:fish_smoker",
+      days: 2,
+      input: 1,
+      preserve_quality: true,
+      upgrade: "society:ancient_roe"
+    },
+    {
+      id: "society:dehydrator",
+      days: 1,
+      input: 8,
+      upgrade: "society:cordycep"
+    },
+    {
+      id: "society:mayonnaise_machine",
+      days: 1,
+      input: 1,
+      preserve_quality: true,
+      upgrade: "society:enkephalin"
+    },
+    {
+      id: "society:preserves_jar",
+      days: 3,
+      input: 5,
+      upgrade: "society:stone_hand"
+    },
+    {
+      id: "society:seed_maker",
+      days: 1,
+      input: 3,
+      preserve_quality: true,
+      upgrade: "society:ancient_cog"
+    },
+    {
+      id: "society:recycling_machine",
+      days: 1,
+      input: 1,
+      upgrade: "society:recycled_core"
+    },
+    {
+      id: "society:bait_maker",
+      days: 1,
+      input: 1
+    },
+    {
+      id: "society:oil_maker",
+      days: 1,
+      input: 1
+    }
+    }
+  }
+  ]
+
+

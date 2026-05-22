@@ -1,5 +1,6 @@
 {
   "type": "artisan_machines:fish_smoker",
+  "blacklisted_upgrades": [],
   "chanced_results": [
     {
       "chance": 1.0,
@@ -14,5 +15,6 @@
       "item": "minecraft:cod"
     }
   ],
-  "processing_hours": 8
+  "processing_hours": 8,
+  "required_upgrades": []
 }

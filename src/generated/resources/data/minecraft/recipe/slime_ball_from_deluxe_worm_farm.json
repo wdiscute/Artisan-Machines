@@ -1,5 +1,6 @@
 {
   "type": "artisan_machines:deluxe_worm_farm",
+  "blacklisted_upgrades": [],
   "chanced_results": [
     {
       "chance": 1.0,
@@ -14,5 +15,6 @@
       "item": "minecraft:dirt"
     }
   ],
-  "processing_hours": 8
+  "processing_hours": 4,
+  "required_upgrades": []
 }

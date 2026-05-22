@@ -1,5 +1,6 @@
 {
   "type": "artisan_machines:wine_keg",
+  "blacklisted_upgrades": [],
   "chanced_results": [
     {
       "chance": 1.0,
@@ -19,5 +20,6 @@
       "item": "minecraft:sweet_berries"
     }
   ],
-  "processing_hours": 8
+  "processing_hours": 8,
+  "required_upgrades": []
 }

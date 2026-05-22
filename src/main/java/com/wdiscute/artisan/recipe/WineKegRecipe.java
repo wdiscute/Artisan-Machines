@@ -13,9 +13,9 @@ import java.util.List;
 
 public class WineKegRecipe extends AbstractArtisanRecipe
 {
-    public WineKegRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public WineKegRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.WINE_KEG.get(), ingredients, result, processing_hours, requiredUpgrades);
+        super(ArtisanRecipeTypes.WINE_KEG.get(), ingredients, result, processing_hours, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

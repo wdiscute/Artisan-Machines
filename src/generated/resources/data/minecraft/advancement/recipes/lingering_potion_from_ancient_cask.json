@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cod": {
+    "has_grapes": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:cod"
+            "items": "minecraft:sweet_berries"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:bone_from_dehydrator"
+        "recipe": "minecraft:lingering_potion_from_ancient_cask"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cod"
+      "has_grapes"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:bone_from_dehydrator"
+      "minecraft:lingering_potion_from_ancient_cask"
     ]
   }
 }

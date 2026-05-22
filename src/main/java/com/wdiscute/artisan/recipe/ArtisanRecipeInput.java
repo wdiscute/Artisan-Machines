@@ -1,6 +1,5 @@
 package com.wdiscute.artisan.recipe;
 
-import com.wdiscute.artisan.upgrades.AbstractUpgrade;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 
@@ -9,17 +8,17 @@ import java.util.List;
 public class ArtisanRecipeInput implements RecipeInput
 {
     List<ItemStack> items;
-    List<AbstractUpgrade> requiredUpgrades;
+    List<ItemStack> upgrades;
 
-    public ArtisanRecipeInput(List<ItemStack> items, List<AbstractUpgrade> requiredUpgrades)
+    public ArtisanRecipeInput(List<ItemStack> items, List<ItemStack> requiredUpgrades)
     {
         this.items = items;
-        this.requiredUpgrades = requiredUpgrades;
+        this.upgrades = requiredUpgrades;
     }
 
-    public List<AbstractUpgrade> getRequiredUpgrades()
+    public List<ItemStack> getUpgrades()
     {
-        return requiredUpgrades;
+        return upgrades;
     }
 
     @Override

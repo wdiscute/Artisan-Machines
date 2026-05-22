@@ -13,9 +13,9 @@ import java.util.List;
 
 public class CrystalariumRecipe extends AbstractArtisanRecipe
 {
-    public CrystalariumRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public CrystalariumRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.CRYSTALARIUM.get(), ingredients, result, processing_hours, requiredUpgrades);
+        super(ArtisanRecipeTypes.CRYSTALARIUM.get(), ingredients, result, processing_hours, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

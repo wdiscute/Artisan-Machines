@@ -1,18 +1,20 @@
 {
   "type": "artisan_machines:crystalarium",
+  "blacklisted_upgrades": [],
   "chanced_results": [
     {
       "chance": 1.0,
       "stack": {
-        "count": 1,
+        "count": 2,
         "id": "minecraft:diamond"
       }
     }
   ],
   "ingredients": [
     {
-      "item": "minecraft:coal"
+      "item": "minecraft:diamond"
     }
   ],
-  "processing_hours": 8
+  "processing_hours": 8,
+  "required_upgrades": []
 }

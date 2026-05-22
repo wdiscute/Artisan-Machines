@@ -1,0 +1,67 @@
+{
+  "type": "artisan_machines:recycling_machine",
+  "blacklisted_upgrades": [],
+  "chanced_results": [
+    {
+      "chance": 0.3,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:raw_copper"
+      }
+    },
+    {
+      "chance": 0.1,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:raw_iron"
+      }
+    },
+    {
+      "chance": 0.1,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:lapis_lazuli"
+      }
+    },
+    {
+      "chance": 0.01,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:diamond"
+      }
+    },
+    {
+      "chance": 0.7,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.6,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:deepslate"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  ],
+  "processing_hours": 2,
+  "required_upgrades": []
+}

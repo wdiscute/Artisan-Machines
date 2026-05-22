@@ -18,26 +18,19 @@ public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput
 {
     RecipeType<?> type;
     List<Ingredient> ingredients;
-    List<ResourceLocation> requiresUpgrade;
+    List<Ingredient> requiresUpgrade;
+    List<Ingredient> blacklistedUpgrades;
     List<ChancedStack> result;
     int processing_hours;
 
-    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
         this.type = type;
         this.ingredients = ingredients;
         this.result = result;
         this.processing_hours = processing_hours;
         this.requiresUpgrade = requiredUpgrades;
-    }
-
-    public AbstractArtisanRecipe(RecipeType<?> type, List<Ingredient> ingredients, ItemStack result, int processing_hours, List<ResourceLocation> requiredUpgrades)
-    {
-        this.type = type;
-        this.ingredients = ingredients;
-        this.result = List.of(new ChancedStack(result, 1));
-        this.processing_hours = processing_hours;
-        this.requiresUpgrade = requiredUpgrades;
+        this.blacklistedUpgrades = blacklistedUpgrades;
     }
 
     @Override
@@ -46,7 +39,7 @@ public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput
         List<Ingredient> ingLeftToCheck = new ArrayList<>(ingredients);
 
         //if input doesn't contain all required upgrades, return false
-        boolean containsAll = new HashSet<>(input.requiredUpgrades.stream().map(AbstractUpgrade::getUpgradeId).toList()).containsAll(requiresUpgrade);
+        boolean containsAll = requiresUpgrade.stream().allMatch(r -> input.upgrades.stream().anyMatch(r));
         if(!containsAll) return false;
 
         for (ItemStack item : input.items)
@@ -103,6 +96,6 @@ public abstract class AbstractArtisanRecipe implements Recipe<ArtisanRecipeInput
 
     public interface Factory<T extends AbstractArtisanRecipe>
     {
-        T create(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades);
+        T create(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades);
     }
 }

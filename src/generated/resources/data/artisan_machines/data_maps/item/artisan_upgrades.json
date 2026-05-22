@@ -1,21 +1,152 @@
 {
   "values": {
-    "artisan_machines:pink_matter": {
+    "artisan_machines:ancient_cog": {
       "machines": [
-        "artisan_machines:loom"
+        "artisan_machines:seed_maker"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:add_random_to_result",
+          "chance": 0.05,
+          "stacks": [],
+          "tags": [
+            "minecraft:beds"
+          ]
+        }
+      ]
+    },
+    "artisan_machines:ancient_roe": {
+      "machines": [
+        "artisan_machines:fish_smoker"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:double_result"
+        }
+      ]
+    },
+    "artisan_machines:black_opal": {
+      "machines": [
+        "artisan_machines:crystalarium"
       ],
       "upgrades": [
         {
           "type": "artisan_machines:transmute_result",
           "transmutations": [
             {
-              "original": "minecraft:gold_ingot",
+              "chance": 0.1,
+              "original": {
+                "item": "minecraft:diamond"
+              },
               "transmuted": {
                 "count": 1,
-                "id": "minecraft:diamond"
+                "id": "minecraft:diamond_block"
               }
             }
           ]
+        }
+      ]
+    },
+    "artisan_machines:broken_clock": {
+      "machines": [
+        "artisan_machines:aging_cask"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:processing_time_multiplier",
+          "multiplier": 0.5
+        }
+      ]
+    },
+    "artisan_machines:cordycep": {
+      "machines": [
+        "artisan_machines:dehydrator"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:empty"
+        }
+      ]
+    },
+    "artisan_machines:enkephalin": {
+      "machines": [
+        "artisan_machines:preserves_jar"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:empty"
+        }
+      ]
+    },
+    "artisan_machines:gray_anatomy": {
+      "machines": [
+        "artisan_machines:wine_keg"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:double_result"
+        }
+      ]
+    },
+    "artisan_machines:infinity_worm": {
+      "machines": [
+        "artisan_machines:deluxe_worm_farm"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:infinite_craft",
+          "chanced_stack": [
+            {
+              "chance": 1.0,
+              "stack": {
+                "count": 1,
+                "id": "minecraft:slime_ball"
+              }
+            }
+          ],
+          "processing_hours": 4
+        }
+      ]
+    },
+    "artisan_machines:inserter": {
+      "machines": [
+        "artisan_machines:ancient_cask"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:empty"
+        }
+      ]
+    },
+    "artisan_machines:pink_matter": {
+      "machines": [
+        "artisan_machines:cheese_press"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:transmute_result",
+          "transmutations": [
+            {
+              "chance": 1.0,
+              "original": {
+                "item": "minecraft:yellow_wool"
+              },
+              "transmuted": {
+                "count": 1,
+                "id": "minecraft:yellow_glazed_terracotta"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "artisan_machines:recycled_core": {
+      "machines": [
+        "artisan_machines:recycling_machine"
+      ],
+      "upgrades": [
+        {
+          "type": "artisan_machines:double_result"
         }
       ]
     },
@@ -29,28 +160,8 @@
           "chance": 0.25,
           "stacks": [],
           "tags": [
-            "minecraft:logs"
+            "minecraft:beds"
           ]
-        }
-      ]
-    },
-    "minecraft:trial_key": {
-      "machines": [
-        "artisan_machines:deluxe_worm_farm"
-      ],
-      "upgrades": [
-        {
-          "type": "artisan_machines:infinite_craft",
-          "chanced_stack": [
-            {
-              "chance": 1.0,
-              "stack": {
-                "count": 1,
-                "id": "minecraft:dirt"
-              }
-            }
-          ],
-          "processing_hours": 8
         }
       ]
     }

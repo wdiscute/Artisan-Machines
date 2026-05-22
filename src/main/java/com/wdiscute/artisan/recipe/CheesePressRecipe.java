@@ -14,9 +14,9 @@ import java.util.List;
 
 public class CheesePressRecipe extends AbstractArtisanRecipe
 {
-    public CheesePressRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_days, List<ResourceLocation> requiredUpgrades)
+    public CheesePressRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_days, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.CHEESE_PRESS.get(), ingredients, result, processing_days, requiredUpgrades);
+        super(ArtisanRecipeTypes.CHEESE_PRESS.get(), ingredients, result, processing_days, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

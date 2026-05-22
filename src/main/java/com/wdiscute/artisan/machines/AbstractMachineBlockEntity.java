@@ -18,6 +18,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -123,7 +124,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity
 
     public void checkForRecipe()
     {
-        ArtisanRecipeInput input = new ArtisanRecipeInput(items, getUpgrades());
+        ArtisanRecipeInput input = new ArtisanRecipeInput(items, upgrades);
 
         var recipeFor = level.getRecipeManager().getRecipeFor(getRecipeType(), input, level);
         if (recipeFor.isPresent())

@@ -1,5 +1,10 @@
 {
   "type": "artisan_machines:ancient_cask",
+  "blacklisted_upgrades": [
+    {
+      "item": "artisan_machines:inserter"
+    }
+  ],
   "chanced_results": [
     {
       "chance": 1.0,
@@ -10,14 +15,15 @@
           }
         },
         "count": 1,
-        "id": "minecraft:potion"
+        "id": "minecraft:lingering_potion"
       }
     }
   ],
   "ingredients": [
     {
-      "item": "minecraft:big_dripleaf"
+      "item": "minecraft:sweet_berries"
     }
   ],
-  "processing_hours": 8
+  "processing_hours": 8,
+  "required_upgrades": []
 }

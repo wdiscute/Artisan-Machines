@@ -216,7 +216,7 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock
     {
         if (!adbe.getResultItem().isEmpty())
             player.displayClientMessage(Component.translatable("block.artisan_machines.machine.currently_making")
-                    .append(Component.translatable(adbe.getResultItem().getFirst().stack().getItem().getDescriptionId()))
+                    .append(adbe.recipeResult.getFirst().stack().getHoverName())
                     .append(Component.translatable("block.artisan_machines.machine.hours", adbe.getHoursRemaining())), true);
     }
 

@@ -13,9 +13,9 @@ import java.util.List;
 
 public class RecyclingMachineRecipe extends AbstractArtisanRecipe
 {
-    public RecyclingMachineRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public RecyclingMachineRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.RECYCLING_MACHINE.get(), ingredients, result, processing_hours, requiredUpgrades);
+        super(ArtisanRecipeTypes.RECYCLING_MACHINE.get(), ingredients, result, processing_hours, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

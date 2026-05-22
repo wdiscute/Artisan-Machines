@@ -1,5 +1,6 @@
 {
   "type": "artisan_machines:aging_cask",
+  "blacklisted_upgrades": [],
   "chanced_results": [
     {
       "chance": 1.0,
@@ -10,14 +11,15 @@
           }
         },
         "count": 1,
-        "id": "minecraft:potion"
+        "id": "minecraft:splash_potion"
       }
     }
   ],
   "ingredients": [
     {
-      "item": "minecraft:glow_berries"
+      "item": "minecraft:sweet_berries"
     }
   ],
-  "processing_hours": 48
+  "processing_hours": 48,
+  "required_upgrades": []
 }

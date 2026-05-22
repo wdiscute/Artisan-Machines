@@ -13,9 +13,9 @@ import java.util.List;
 
 public class PreservesJarRecipe extends AbstractArtisanRecipe
 {
-    public PreservesJarRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public PreservesJarRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.PRESERVES_JAR.get(), ingredients, result, processing_hours, requiredUpgrades);
+        super(ArtisanRecipeTypes.PRESERVES_JAR.get(), ingredients, result, processing_hours, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

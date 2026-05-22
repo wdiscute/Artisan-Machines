@@ -1,6 +1,10 @@
 {
   "type": "artisan_machines:preserves_jar",
-  "blacklisted_upgrades": [],
+  "blacklisted_upgrades": [
+    {
+      "item": "artisan_machines:stone_hand"
+    }
+  ],
   "chanced_results": [
     {
       "chance": 1.0,
@@ -11,12 +15,6 @@
     }
   ],
   "ingredients": [
-    {
-      "item": "minecraft:cactus"
-    },
-    {
-      "item": "minecraft:cactus"
-    },
     {
       "item": "minecraft:cactus"
     },

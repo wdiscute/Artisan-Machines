@@ -13,9 +13,9 @@ import java.util.List;
 
 public class OilMakerRecipe extends AbstractArtisanRecipe
 {
-    public OilMakerRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public OilMakerRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.OIL_MAKER.get(), ingredients, result, processing_hours, requiredUpgrades);
+        super(ArtisanRecipeTypes.OIL_MAKER.get(), ingredients, result, processing_hours, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

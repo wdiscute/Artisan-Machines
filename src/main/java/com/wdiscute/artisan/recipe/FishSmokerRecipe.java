@@ -13,9 +13,9 @@ import java.util.List;
 
 public class FishSmokerRecipe extends AbstractArtisanRecipe
 {
-    public FishSmokerRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<ResourceLocation> requiredUpgrades)
+    public FishSmokerRecipe(List<Ingredient> ingredients, List<ChancedStack> result, int processing_hours, List<Ingredient> requiredUpgrades, List<Ingredient> blacklistedUpgrades)
     {
-        super(ArtisanRecipeTypes.FISH_SMOKER.get(), ingredients, result, processing_hours, requiredUpgrades);
+        super(ArtisanRecipeTypes.FISH_SMOKER.get(), ingredients, result, processing_hours, requiredUpgrades, blacklistedUpgrades);
     }
 
     @Override

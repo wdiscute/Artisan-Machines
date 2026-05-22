@@ -1,9 +1,13 @@
 {
   "type": "artisan_machines:oil_maker",
+  "blacklisted_upgrades": [],
   "chanced_results": [
     {
       "chance": 1.0,
       "stack": {
+        "components": {
+          "minecraft:custom_name": "\"Oil\""
+        },
         "count": 1,
         "id": "minecraft:black_candle"
       }
@@ -14,5 +18,6 @@
       "item": "minecraft:tropical_fish"
     }
   ],
-  "processing_hours": 2
+  "processing_hours": 2,
+  "required_upgrades": []
 }

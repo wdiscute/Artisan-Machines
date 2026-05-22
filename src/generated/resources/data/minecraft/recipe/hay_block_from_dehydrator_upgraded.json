@@ -1,0 +1,51 @@
+{
+  "type": "artisan_machines:dehydrator",
+  "blacklisted_upgrades": [],
+  "chanced_results": [
+    {
+      "chance": 1.0,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:hay_block"
+      }
+    },
+    {
+      "chance": 1.0,
+      "stack": {
+        "count": 1,
+        "id": "minecraft:hay_block"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    },
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    },
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    },
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    },
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    },
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    },
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    },
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    },
+    {
+      "tag": "minecraft:villager_plantable_seeds"
+    }
+  ],
+  "processing_hours": 8,
+  "required_upgrades": []
+}

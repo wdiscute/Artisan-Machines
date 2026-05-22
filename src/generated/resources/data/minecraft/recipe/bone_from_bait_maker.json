@@ -1,5 +1,6 @@
 {
   "type": "artisan_machines:bait_maker",
+  "blacklisted_upgrades": [],
   "chanced_results": [
     {
       "chance": 1.0,
@@ -14,5 +15,6 @@
       "item": "minecraft:salmon"
     }
   ],
-  "processing_hours": 2
+  "processing_hours": 2,
+  "required_upgrades": []
 }
