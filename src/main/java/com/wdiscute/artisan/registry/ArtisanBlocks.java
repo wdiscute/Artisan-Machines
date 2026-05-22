@@ -31,6 +31,7 @@ public interface ArtisanBlocks
     DeferredBlock<Block> RECYCLING_MACHINE = register("recycling_machine", RecyclingMachineBlock::new);
     DeferredBlock<Block> BAIT_MAKER = register("bait_maker", BaitMakerBlock::new);
     DeferredBlock<Block> OIL_MAKER = register("oil_maker", OilMakerBlock::new);
+    DeferredBlock<Block> CHARGING_ROD = register("charging_rod", ChargingRodBlock::new);
 
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> block)

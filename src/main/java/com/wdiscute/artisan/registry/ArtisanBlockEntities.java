@@ -32,6 +32,7 @@ public interface ArtisanBlockEntities
     Supplier<BlockEntityType<?>> RECYCLING_MACHINE = register("recycling_machine", ArtisanBlocks.RECYCLING_MACHINE, RecyclingMachineBlockEntity::new);
     Supplier<BlockEntityType<?>> BAIT_MAKER = register("bait_maker", ArtisanBlocks.BAIT_MAKER, BaitMakerBlockEntity::new);
     Supplier<BlockEntityType<?>> OIL_MAKER = register("oil_maker", ArtisanBlocks.OIL_MAKER, OilMakerBlockEntity::new);
+    Supplier<BlockEntityType<?>> CHARGING_ROD = register("oil_maker", ArtisanBlocks.CHARGING_ROD, ChargingRodBlockEntity::new);
 
 
     static <T extends BlockEntity> Supplier<BlockEntityType<?>> register(String name, DeferredBlock<Block> block, BlockEntityType.BlockEntitySupplier<? extends T> factory)

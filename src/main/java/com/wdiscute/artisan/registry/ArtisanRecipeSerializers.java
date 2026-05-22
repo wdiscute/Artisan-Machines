@@ -29,6 +29,7 @@ public interface ArtisanRecipeSerializers
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> RECYCLING_MACHINE = register("recycling_machine", RecyclingMachineRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> BAIT_MAKER = register("bait_maker", BaitMakerRecipe::new);
     Supplier<RecipeSerializer<AbstractArtisanRecipe>> OIL_MAKER = register("oil_maker", OilMakerRecipe::new);
+    Supplier<RecipeSerializer<AbstractArtisanRecipe>> CHARGING_ROD = register("charging_rod", ChargingRodRecipe::new);
 
 
     static Supplier<RecipeSerializer<AbstractArtisanRecipe>> register(
